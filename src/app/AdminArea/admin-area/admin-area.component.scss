@@ -1,0 +1,40 @@
+.container{
+    text-align: center;
+}
+
+li {
+    outline-style: double;
+    outline-color: gold;
+    a {
+        color: gold;
+        font-size: 1.5em;
+        width: 100%;
+    }
+    li:hover {
+        background-color: rgb(49, 49, 49);
+    }
+}
+
+.button_holder {
+    background-color: black;   
+}
+
+button {
+    background-color: black;
+    border: none;
+    color: gold;
+    display: inline-block;
+    font-size: 2em;
+    cursor: pointer;
+    width: 100%;
+}
+
+.dropdown {
+    margin-top: 15px;
+    li {
+        background-color: rgb(36, 12, 1);
+    }
+}
+.tabconfig {
+    padding: 10px;
+}

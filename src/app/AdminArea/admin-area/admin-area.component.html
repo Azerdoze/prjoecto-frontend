@@ -1,0 +1,89 @@
+<section class="container">
+    <h1>Administrator Backoffice</h1>
+    
+    
+    
+    <ul>
+        <li class="button_holder">           
+            <button title="nations-button" (click)="toggleNationsTab()">Nations</button>
+            <div *ngIf="revealNations">
+                <ul class="dropdown">
+                    <li>
+                        <div class="tabconfig"><a routerLink="/create-nation">Create Nation</a></div>
+                    </li>
+                    <li>
+                        <div class="tabconfig"><a routerLink="/update-nation">Update Nation</a></div>
+                    </li>
+                    <li>
+                        <div class="tabconfig"><a routerLink="/delete-nation">Delete Nation</a></div>
+                    </li>
+                    <li>
+                        <div class="tabconfig"><a routerLink="/create-nation-trait">Create Nation Trait</a></div>
+                    </li>
+                    <li>
+                        <div class="tabconfig"><a routerLink="/update-nation-trait">Update Nation Trait</a></div>
+                    </li>
+                    <li>
+                        <div class="tabconfig"><a routerLink="/delete-nation-trait">Delete Nation Trait</a></div>
+                    </li>
+                </ul>
+            </div>           
+        </li>
+        
+        <li class="button_holder">
+            <button title="religions-button" (click)="toggleReligionsTab()">Religions</button>
+            <div *ngIf="revealReligions">
+                <ul class="dropdown">
+                    <li class="adminTab">
+                        <div class="tabconfig"><a routerLink="/create-pantheon">Create Pantheon</a></div>
+                    </li>
+                    <li class="adminTab">
+                        <div class="tabconfig"><a routerLink="/update-pantheon">Update Pantheon</a></div>
+                    </li>
+                    <li class="adminTab">
+                        <div class="tabconfig"><a routerLink="/delete-pantheon">Delete Pantheon</a></div>
+                    </li>
+                    <li class="adminTab">
+                        <div class="tabconfig"><a routerLink="/create-god">Create God</a></div>
+                    </li>
+                    <li class="adminTab">
+                        <div class="tabconfig"><a routerLink="/update-god">Update God</a></div>
+                    </li>
+                    <li class="adminTab">
+                        <div class="tabconfig"><a routerLink="/delete-god">Delete God</a></div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        
+        <li class="button_holder">
+            <button title="orders-button" (click)="toggleOrdersTab()">Orders</button>
+            <div *ngIf="revealOrders">
+                <ul class="dropdown">
+                    <li class="admin-tab">
+                        <div class="tabconfig"><a routerLink="/create-order">Create Orders</a></div>
+                    </li>
+                    <li class="admin-tab">
+                        <div class="tabconfig"><a routerLink="/update-order">Update Orders</a></div>
+                    </li>
+                    <li class="admin-tab">
+                        <div class="tabconfig"><a routerLink="/delete-order">Delete Orders</a></div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        
+        <li class="button_holder">
+            <button title="users-button" (click)="toggleUsersTab()">Users</button>
+            <div *ngIf="revealUsers">
+                <ul class="dropdown">
+                    <li class="admin-tab">
+                        <div class="tabconfig"><a routerLink="">modify user rights</a></div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+    </ul>    
+    
+</section>

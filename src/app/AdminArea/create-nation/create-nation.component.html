@@ -1,0 +1,70 @@
+<section class="container">
+
+    <h1>Create Nation</h1>
+
+    <div class="registryForm">
+
+        <form [formGroup]="createNation" (ngSubmit)="onSubmit()">
+            <h5 class="red-alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</h5>
+            <div>
+                <label>
+                    Code
+                    <input type="text" name="nation_id" formControlName="nation_id" required="" minlength="2" maxlength="4">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Name
+                    <input type="text" name="nation_name" formControlName="nation_name" required="" minlength="8" maxlength="40">
+                </label>
+            </div>
+            <div>
+                Short Description
+                <textarea name="nation_summary" formControlName="nation_summary" rows="2" cols="30">
+                </textarea>
+            </div>
+            <div>
+                Description
+                <textarea name="nation_description" formControlName="nation_description" rows="2" cols="30" required="">
+                </textarea>
+            </div>
+            <div>
+                <label>
+                    Hub
+                    <input type="text" name="nation_hub" formControlName="nation_hub" required="" minlength="3" maxlength="30">
+                </label>
+            </div>
+            <div>
+                Hub Description
+                <textarea name="nation_hub_description" fromControlName="nation_hub_description" rows="2" cols="30" required="">
+                </textarea>
+            </div>
+            <div>
+                <label>
+                    Region
+                    <select name="region">
+                        <option *ngFor="let region of regions; index as i" value="{{region.code]]">{{ region.region }}</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Banner
+                    <input type="file">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Traits
+                    <select name="traits">
+                        <option></option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <button type="submit" name="send">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+</section>

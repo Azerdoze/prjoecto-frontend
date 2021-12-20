@@ -1,1 +1,197 @@
 /* You can add global styles to this file, and also import other style files */
+
+// global reset
+@import "reset.scss";
+
+// default style
+@font-face {
+    font-family: angars;
+    src: url(./assets/fonts/angars-runes-personal-use-only.regular.ttf)
+}
+
+h1, h2, h3, p { padding-bottom: 1em; }
+
+h1, h2, h3 { font-weight: 800; }
+
+h1 {
+    font-size: 4.3em;
+    text-align: center;
+    padding-bottom: 150px;
+    font-family: angars;
+    text-transform: uppercase;
+}
+
+h2, h3, h4, h5, p { font-family: Arial, Helvetica, sans-serif;}
+
+h2 { font-size: 1.35em; }
+
+em {  font-style: italic; }
+
+a {
+    text-decoration: none;
+    color: black;
+    &:visited {color: initial}
+}
+
+li {
+    padding: 0 0 10px 0;   
+}
+
+strong { font-weight: 800; }
+
+.container {
+    padding: 0 2rem;
+    margin-bottom: 4rem;
+}
+
+// class to create a division with specific traits, like a card
+.div-pocket, .div-card {   
+    margin: 2rem 0;
+    border: 2px solid brown;
+    border-radius: 25px;
+    padding: 1rem;
+}
+
+.div-card {
+    transition: 600ms;
+    &:hover {
+        background: rgb(97, 18, 18);
+        p {
+            color: white;
+        };
+        transform: scale(1.3);
+    }
+}
+
+// class to create a margin sideways, handy with grid
+.margin-side {
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
+// class to define the background pane
+.background-fill { background: url(./assets/Images/page-background.jpg); }
+
+// class to define a pocket background white
+.background-fill-white { background: white; }
+
+// classes to defined a simple padding on the bottom for the detailed info page
+.kaastianhouselist li, .availableclasses li { padding-bottom: 0.8em; }
+
+// classes to define a text element with a specific color
+.blue { color: #09273e; }
+
+.golden {
+    color: #f8b700;
+    text-shadow: 1px 1px 10px black, 0 0 1em black, 0 0 2em black, 2px 0 1em black, -2px 0 1em black; 
+}
+
+// classes to put alter text (centered, uppercase)
+.text-align-center { text-align: center; }
+
+.uppercase { text-transform: uppercase;}
+
+// class to define the dimensions of standard banners
+.banner img {
+    height: 100px;
+    width: 100px;
+    padding: 10px;
+}
+
+// class to define how a grid shaped container should look like
+.grid-area-big {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px, 320px));
+    grid-template-rows: auto;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+// class to define a page with 2 columns using grid
+.two-page-grid {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 0.5rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-bottom: 4rem;
+}
+
+// class to add extra spacing between pagetitle and content due to large image 
+.detailedpage-header { padding-bottom: 150px; }
+
+// configuration of the left side of a two grid page
+.nationleftside {
+    padding: 1rem 1rem 0rem;
+    
+    .mainhub {
+        font-size: 1.25em;
+        padding-bottom: 0.5em;
+    }
+}
+
+// configuration of the right side of a two grid page
+.nationrightside {
+    padding: 20px 40px;
+    background-color: #ebdec2;
+    border: 8px solid #e0ca99;
+    h2 {
+        padding-top: 0.5rem;
+    }
+    .nationbanner {
+        text-align: center;
+        height: 80px;
+    }
+    .nationbanner img {
+        width: 222px;
+        position: relative;
+        bottom: 150px;
+    }
+}
+
+// Below are the configurations for different resolution screens
+
+@media only screen and (max-width: 1023px) {
+    .grid-area-big { gap: 0; }
+    
+    h1 { padding-bottom: 10px; }
+}
+
+@media only screen and (max-width: 830px) {
+    .nationrightside .nationbanner img { right: 20px; }
+}
+
+@media only screen and (max-width: 750px) {
+    .two-page-grid { display: block; }
+    
+    .detailedpage-header { padding-bottom: 10px; }
+    
+    .nationleftside { padding: 1rem; }
+
+    .nationrightside { padding: 1rem;}
+
+    .nationrightside .nationbanner {
+        text-align: right;
+        height: 20px;
+    }
+    .nationrightside .nationbanner img {
+        width: 170px;
+        bottom: 104px;
+        right: -23px;
+    }
+}
+@media only screen and (max-width: 610px) {
+    .nationrightside .nationbanner img {
+         width: 120px;
+         bottom: 80px;
+        }
+}
+@media only screen and (max-width: 450px) {
+    .container { padding: 0;}
+    .two-page-grid { padding: 0;}
+
+    .nationrightside .nationbanner img {
+        width: 77px;
+        bottom: 50px;
+       }
+}

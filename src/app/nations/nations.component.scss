@@ -1,0 +1,17 @@
+
+
+.region {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    grid-template-rows: auto;
+}
+
+.nation img {
+    height: 100px;
+    width: 100px;
+    padding: 10px;
+}
+
+.smalldesccolor {
+    color: #b1997f;
+}

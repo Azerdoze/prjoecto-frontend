@@ -1,0 +1,13 @@
+a {
+    text-decoration: underline;
+    color: blue;
+    padding: 5px;
+    &:focus {
+        background-color: brown;
+        color: white;
+    }
+}
+
+li {
+    margin-bottom: 15px;
+}

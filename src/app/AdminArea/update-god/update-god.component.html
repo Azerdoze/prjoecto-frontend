@@ -1,0 +1,50 @@
+<section class="container">
+
+    <h1>Update God</h1>
+
+    <div class="registryForm">
+
+        <form [formGroup]="updateGod" (ngSubmit)="onSubmit()">
+        <h5 class="red-alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</h5>
+            <div>
+                <label>
+                    Name
+                    <input type="text" name="god" formControlname="name" required="" minlength="8" maxlength="40">
+                </label>
+            </div>
+            <div>
+                <label>
+                    alignment
+                <input type="text" name="alignment" formControlname="summary" required="" minlength="2" maxlength="15">
+                </label>
+            </div>
+            <div>
+                <label>
+                    God Domains
+                    <input type="text" name="domains" formControlname="domains" required="" minlength="8" maxlength="50">
+                </label>
+            </div>
+            <div>
+                <label>
+                    God Mysteries
+                    <input type="text" name="mysteries" formControlname="mysteries" required="" minlength="8" maxlength="50">
+                </label>
+            </div>
+            <div>
+                <label>
+                    God's Favoured Weapon
+                    <input type="text" name="favweapon" formControlname="favweapon" required=""  minlength="3" maxlength="50">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Belongs to which Pantheon
+                    <option></option>
+                </label>
+            </div>
+            <div>
+                <button type="submit" name="send">Register</button>
+            </div>
+        </form>
+    </div>
+</section>

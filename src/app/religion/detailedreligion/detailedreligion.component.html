@@ -1,0 +1,26 @@
+<section>
+    
+    <h1 class="detailedpage-header">{{ pantheon.pantheon_name }}</h1>
+            
+    <div class="grid-area-big">
+    
+        <h2 class="text-align-center">Description</h2>
+        <div [innerHTML]="pantheon.pantheon_description | sanitizeHtml"></div>
+        
+        <h2 class="mainhub text-align-center">Places of Influence</h2>
+        <h3 class="text-align-center"> {{ pantheon.pantheon_scope }}</h3>
+    
+        <div class="div-card margin-side text-align-center background-fill-white" *ngFor="let god of gods, index as i;">
+            
+            <h3 class="golden">{{god.god_name}}</h3>
+
+            <p class="smalldesccolor">{{god.god_alignment}}</p>
+            <p class="smalldesccolor">{{god.god_domains}}</p>
+            <p class="smalldesccolor">{{god.god_mysteries}}</p>
+            <p class="smalldesccolor">{{god.god_fav_weapon}}</p>
+
+        </div>
+          
+    </div>
+        
+</section>

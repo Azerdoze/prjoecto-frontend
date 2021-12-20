@@ -1,0 +1,60 @@
+.email-signup {
+    border: 2px solid brown;
+    border-radius: 25px;
+    padding: 20px 0 20px 20px;
+    background: url(../../../assets/Images/newsletter-art.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 340px;
+}
+.email-signup-content {
+    padding: 1rem;
+    width: 60%;
+}
+
+.email-signup-content h3, .email-signup-content h4 {
+    color: blanchedalmond;
+    text-shadow: 0px 0px 5px black;
+}
+
+div { 
+    h3 {
+        font-size: 35px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding-bottom: 10px;
+    }
+    h4 {
+        font-size: 22px;
+        padding-bottom: 10px;
+    }
+}
+form div{
+    padding-top: 1rem;
+    .signup-email-box, .signup-button {
+        padding: 10px;
+    }
+    .signup-email-box {
+        width: 84%;
+        background: #f1f1f1;
+        padding: 15px;
+    }
+    .signup-button {
+        text-transform: uppercase;
+        text-decoration: none;
+        background: #242121;
+        cursor: pointer;
+        font-size: 1.6rem;
+        font-weight: 700;
+        border: 2px solid white;
+        color: #FFFFFF;
+    }
+}
+form .ng-invalid.ng-touched {
+    border: 2px solid #F00;
+}
+.red-alert {
+    color: red;
+    text-shadow: 1px 1px 1px black;
+    font-weight: 800;
+}

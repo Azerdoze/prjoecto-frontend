@@ -1,0 +1,24 @@
+<section class="container">
+  
+  <h1>Orders & Organizations</h1>
+  
+  <p class="text-align-center">Throughout the continent, human civilizations have created diverse institutions to help with their daily lives. Most are specialized in a particular field.</p>
+  
+  <div class="grid-area-big">
+    
+    <div class="div-card text-align-center margin-side background-fill-white" *ngFor="let order of orders, index as i;">
+      
+      <a routerLink="/orders/{{order.order_id}}">
+      
+      <div class="banner" [innerHTML]="order.order_banner | sanitizeHtml"></div>
+      <h3 class="golden">{{order.order_name}}</h3>
+      <p><em>{{order.order_summary}}</em></p>
+       
+      </a>
+        
+      
+    </div>
+    
+  </div>
+  
+</section>

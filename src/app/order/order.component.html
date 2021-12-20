@@ -1,0 +1,42 @@
+<section>
+    
+    <h1 class="detailedpage-header">{{ order.order_name }}</h1>
+    
+    <article class="two-page-grid">
+        <div class="nationleftside">
+            
+            <h2 class="text-align-center">Description</h2>
+            <div [innerHTML]="order.order_description | sanitizeHtml"></div>
+            
+            <h2 class="mainhub text-align-center">Headquarters</h2>
+            <h3 class="text-align-center"> {{ order.order_headquarters }}</h3>
+            
+        </div>
+        
+        <div class="nationrightside">
+            
+            <div class="nationbanner" [innerHTML]="order.order_banner | sanitizeHtml"></div>           
+            
+            <h2 class="blue"><em>{{ order.order_official_name }}</em></h2>
+            
+            <h3 class="blue">Scope</h3>
+            <p>{{order.order_scope}}</p>
+            
+            <h3 class="blue">Values</h3>
+            <p>{{order.order_values}}</p>
+            
+            <h3 class="blue">Goals</h3>
+            <p>{{order.order_goals}}</p>
+
+            <h3 class="blue">Allies</h3>
+            <p>{{order.order_allies}}</p>
+
+            <h3 class="blue">Enemies</h3>
+            <p>{{order.order_enemies}}</p>
+
+            <h3 class="blue">Rivals</h3>
+            <p>{{order.order_rivals}}</p>
+        </div>
+    </article>
+    
+</section>

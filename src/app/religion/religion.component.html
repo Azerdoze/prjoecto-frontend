@@ -1,0 +1,19 @@
+<section class="container">
+
+    <h1>Religion</h1>
+    <p class="text-align-center">The human kingdoms are vast and diverse, with each diverse culture having a different set of beliefs. Here tou can delve into each culture's pantheons, from Major Religions to forbidden cults.</p>
+    
+    <div class="grid-area-big">
+
+      <div class="div-card margin-side text-align-center background-fill-white" *ngFor="let pantheon of pantheons, index as i;">
+        <a routerLink="/detailedreligion/{{pantheon.pantheon_id}}">
+        <div class="banner" [innerHTML]="religion.banner | sanitizeHtml"></div>
+        <h3 class="golden">{{pantheon.pantheon_name}}</h3>
+        <p><em>{{pantheon.pantheon_summary}}</em></p>
+        </a>
+      </div>
+        
+    </div>
+  
+  </section>
+  

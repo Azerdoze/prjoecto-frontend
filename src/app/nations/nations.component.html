@@ -1,0 +1,30 @@
+<article class="container">
+  <h1>Nations</h1>
+  <section class="pageheader">
+    <p>The continent is thriving with nations that hunger for supremacy. in this section you'll learn about each of those, their respective culture and traits.</p>
+    <p>All the Human nations, from the biggest empire to the smallest tribe, can be found here. Delve in, and soak in a rich and diversified setting. These nations are categorized by region, so to be easier for newcomers to identify each of the many nations.</p>
+  </section>
+  
+  
+  <section class="div-pocket text-align-center" *ngFor="let region of regions; index as i">
+    <h2>{{region.region}}</h2>
+    <p>{{region.regiondescription}}</p>
+    
+    <div class="grid-area-big">
+      <div class="div-card background-fill-white" *ngFor="let nation of region.nations;">
+
+        <a routerLink="/nationindetail/{{region.code}}/{{nation.code}}">
+
+          <div class="banner" [innerHTML]="nation.banner | sanitizeHtml"></div>
+          <h3 class="golden">{{nation.name}}</h3>
+          <p class="smalldesccolor">{{nation.shortdescription}}</p>
+        
+        </a>
+          
+        </div>
+        
+      </div>
+      
+    </section>
+  
+</article>

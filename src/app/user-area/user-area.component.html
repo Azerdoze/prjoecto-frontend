@@ -1,0 +1,56 @@
+<section class="container">
+
+    <h1>User Profile</h1>
+    
+    <div class="registryForm">
+        <form [formGroup]="updateUser">
+            <div>
+                <label>
+                    Name
+                    <input type="text" name="name" formControlName="name" required="" minlength="3" maxlength="60">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Email
+                    <input type="email" name="email" formControlName="email" required="">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Password
+                    <input type="password" name="password" formControlName="password" required="" minlength="8" maxlength="1000">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Confirm Password
+                    <input type="password" name="confirm_password" required="" minlength="8" maxlength="1000">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Country
+                    <input type="text" name="country" formControlName="country" required="" minlength="4" maxlength="20">
+                </label>
+            </div>
+            <div>
+                <label>
+                    City
+                    <input type="text" name="city" formControlName="city" required="" minlength="3" maxlength="40">
+                </label>
+            </div>
+            <div>
+                <button type="submit" name="send">update</button>
+            </div>
+        </form>
+        <div>
+            <div>
+                    Characters
+                    <!-- ngfor  user_character de user_characters onde user_id = N -->
+                    <!-- link para character detail , onde dá para fazer update/remover character -->
+            </div>
+        </div>
+    </div>
+
+</section>
