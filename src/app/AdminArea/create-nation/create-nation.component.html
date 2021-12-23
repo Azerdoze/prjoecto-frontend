@@ -8,6 +8,14 @@
             <h5 class="red-alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</h5>
             <div>
                 <label>
+                    Region
+                    <select name="region">
+                        <option *ngFor="let region of regions; index as i" value="{{region.region_id]]">{{ region.region_name }}</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
                     Code
                     <input type="text" name="nation_id" formControlName="nation_id" required="" minlength="2" maxlength="4">
                 </label>
@@ -38,14 +46,6 @@
                 Hub Description
                 <textarea name="nation_hub_description" fromControlName="nation_hub_description" rows="2" cols="30" required="">
                 </textarea>
-            </div>
-            <div>
-                <label>
-                    Region
-                    <select name="region">
-                        <option *ngFor="let region of regions; index as i" value="{{region.code]]">{{ region.region }}</option>
-                    </select>
-                </label>
             </div>
             <div>
                 <label>

@@ -1,11 +1,11 @@
-import { Nationindetail } from "./nationindetail";
+// import { Nationindetail } from "./nationindetail";
 
-export class Regions {
-    public code: string = "";
-    public region: string = "";
-    public regiondescription: string = "";
-    public nations: Nationindetail[];
-}
+// export class Regions {
+//     public code: string = "";
+//     public region: string = "";
+//     public regiondescription: string = "";
+//     public nations: Nationindetail[];
+// }
 
 export class Region {
     public region_id: string = "";

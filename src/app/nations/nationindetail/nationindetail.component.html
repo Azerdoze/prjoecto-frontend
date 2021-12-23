@@ -1,24 +1,24 @@
 <section>
     
-    <h1 class="detailedpage-header">{{ nation.name }}</h1>
+    <h1 class="detailedpage-header">{{ nation.nation_name }}</h1>
 
     <article class="two-page-grid">
         <div class="nationleftside">
              
              <h2 class="text-align-center">Description</h2>
-             <div [innerHTML]="nation.description | sanitizeHtml"></div>
+             <div [innerHTML]="nation.nation_description | sanitizeHtml"></div>
     
              <h2 class="mainhub text-align-center">Main Hub</h2>
-             <h3> {{ nation.hub }}</h3>
+             <h3> {{ nation.nation_hub }}</h3>
     
-            <div [innerHTML]="nation.hubdescription | sanitizeHtml"></div>
+            <div [innerHTML]="nation.nation_hub_description | sanitizeHtml"></div>
         </div>
     
         <div class="nationrightside">
             
-            <div class="nationbanner" [innerHTML]="nation.banner | sanitizeHtml"></div>           
+            <div class="nationbanner" [innerHTML]="nation.nation_banner | sanitizeHtml"></div>           
 
-            <h2 class="blue text-align-center">{{ nation.name }} Traits </h2>
+            <h2 class="blue text-align-center">{{ nation.nation_name }} Traits </h2>
     
             <div [innerHTML]="nation.traits | sanitizeHtml"></div>
         </div>

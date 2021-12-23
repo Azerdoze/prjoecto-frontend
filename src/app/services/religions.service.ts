@@ -14,7 +14,8 @@ import { dummyPantheons } from '../dummyDB/dummyPantheons';
 })
 export class ReligionsService {
 
-  dbLink = "?";
+  pantheonDBLink = "http://localhost/backend/pantheons";
+  godsDBLink = "http://localhost/backend/gods";
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -27,20 +28,41 @@ export class ReligionsService {
 
   // CRUD for Pantheons
   getPantheons(): Observable<Pantheon[]> {
-    return this.http.get < Pantheon[] > ( this.dbLink + "?get");
+    return this.http.get < Pantheon[] > ( this.pantheonDBLink );
   }
-  getPantheon(pantheon_id: string): Observable<Religions> {
-    return this.http.post < Pantheon > (this.dbLink) + "?get&pantheon_id=" + pantheon_id;
+  getPantheon(pantheon_id: number): Observable<Pantheon> {
+    return this.http.get < Pantheon > (this.pantheonDBLink + "/" + pantheon_id);
+  }
+  addPantheon(pantheon: Pantheon) {
+    return this.http.post < Pantheon > ( this.godsDBLink, pantheon, this.httpOptions);
   }
 
+  updatePantheon(pantheon_id:number): Observable<Pantheon> {
+    return this.http.put <Pantheon> ( this.godsDBLink + "/" + pantheon_id, this.httpOptions );
+  }
+
+  deletePantheon(pantheon_id:number): Observable<Pantheon> {
+    return this.http.delete <Pantheon> ( this.godsDBLink + "/" + pantheon_id, this.httpOptions );
+  }
 
   // CRUD for Gods
   getGods(): Observable<God[]> {
-    return this.http.get < God[] > ( this.dbLink + "?get");
+    return this.http.get < God[] > ( this.godsDBLink );
   }
 
   getGod(god_id: number): Observable<God> {
-    return this.http.post < God > (this.dbLink) + "?get&god_id=" + god_id;
+    return this.http.get < God > (this.godsDBLink + "/" + god_id);
   }
   
+  addGod(god: God) {
+    return this.http.post < God > ( this.godsDBLink , god, this.httpOptions);
+  }
+
+  updateOrder(god_id:number): Observable<God> {
+    return this.http.put <God> ( this.godsDBLink + "/" + god_id, this.httpOptions );
+  }
+
+  deleteOrder(god_id:number): Observable<God> {
+    return this.http.delete <God> ( this.godsDBLink + "/" + god_id, this.httpOptions );
+  }
 }

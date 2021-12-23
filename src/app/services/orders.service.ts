@@ -11,32 +11,34 @@ import { Orders } from '../models/orders';
 })
 export class OrdersService {
 
-  dbLink = "?"
+  OrdersDBLink = "http://localhost/backend/orders"
 
-  // private httpOptions = {
-  //   headers: new HttpHeaders({
-  //     "Content-Type":"application/json"
-  //   })
+  private httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type":"application/json"
+    })
 
-  // };
+  };
 
   constructor( private http: HttpClient ) { }
 
   getOrders(): Observable<Orders[]> {
-
-    // return of(DummyOrders);
-
-    return this.http.get < Orders[] > ( this.dbLink + "?get");
+    return this.http.get < Orders[] > ( this.OrdersDBLink );
   }
   
   getOrder(order_id: number): Observable<Orders> {
-
-    // return of(DummyOrders.find( order => order.code == orderCode));
-
-    return this.http.post < Orders > (this.dbLink) + "?get&order_id=" + order_id;
+    return this.http.get < Orders > (this.OrdersDBLink + "/" + order_id ) ;
   }
 
-  // addOrder(order: Orders) {
-  //   return this.http.post < Orders > ( this.dbLink + "?add", order, this.httpOptions);
-  // }
+  addOrder(order: Orders) {
+    return this.http.post < Orders > ( this.OrdersDBLink , order, this.httpOptions);
+  }
+
+  updateOrder(order_id:number): Observable<Orders> {
+    return this.http.put <Orders> ( this.OrdersDBLink + "/" + order_id, this.httpOptions );
+  }
+
+  deleteOrder(order_id:number): Observable<Orders> {
+    return this.http.delete <Orders> ( this.OrdersDBLink + "/" + order_id, this.httpOptions );
+  }
 }

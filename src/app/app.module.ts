@@ -41,6 +41,7 @@ import { CreateOrderComponent } from './AdminArea/create-order/create-order.comp
 import { UpdateOrderComponent } from './AdminArea/update-order/update-order.component';
 import { DeleteOrderComponent } from './AdminArea/delete-order/delete-order.component';
 import { UserAreaComponent } from './user-area/user-area.component';
+import { RegionComponent } from './nations/region/region.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { UserAreaComponent } from './user-area/user-area.component';
     CreateOrderComponent,
     UpdateOrderComponent,
     DeleteOrderComponent,
-    UserAreaComponent
+    UserAreaComponent,
+    RegionComponent
   ],
   imports: [
     BrowserModule,

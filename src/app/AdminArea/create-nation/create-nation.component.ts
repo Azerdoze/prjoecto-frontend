@@ -3,9 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Nation } from 'src/app/models/nationindetail';
 
-import { Regions } from 'src/app/models/region';
-
-import { NationsService } from 'src/app/services/nations.service';
+import { Region } from 'src/app/models/region';
 
 @Component({
   selector: 'app-create-nation',
@@ -14,15 +12,14 @@ import { NationsService } from 'src/app/services/nations.service';
 })
 export class CreateNationComponent implements OnInit {
 
-  regions: Regions[] = this.nationService.getRegions();
-  region: Regions | undefined;
+  regions: Region[];
+  region: Region | undefined;
   
   nation = new Nation();
   createNation : FormGroup;
   errorMessage : string;
   
   constructor(
-    private nationService: NationsService,
     private fb : FormBuilder
   ) { }
 

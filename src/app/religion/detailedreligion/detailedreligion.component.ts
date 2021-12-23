@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import { God } from '../../models/god';
 
-import { Religions } from '../../models/religions';
+import { Pantheon } from '../../models/pantheon';
 import { ReligionsService } from '../../services/religions.service';
 
 @Component({
@@ -12,7 +13,10 @@ import { ReligionsService } from '../../services/religions.service';
 export class DetailedreligionComponent implements OnInit {
 
   // religions: Religions[];
-  religion: Religions | undefined;
+  pantheon: Pantheon | undefined;
+
+  gods: God[];
+  god: God | undefined;
 
   constructor(
     private router: Router,
@@ -24,15 +28,16 @@ export class DetailedreligionComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        const code = event.url.split("/").pop();
+        const code : number = Number(event.url.split("/").pop());
         console.log(event.url, code);
 
-        this.religionService.getPantheon(code).subscribe( data => this.religion = data );
+        this.religionService.getPantheon(code).subscribe( data => this.pantheon = data );
       }
     })
 
-    const code = this.route.snapshot.paramMap.get("code");
-    this.religionService.getPantheon(code).subscribe( data => this.religion = data);
+    const code : number = Number(this.route.snapshot.paramMap.get("code"));
+    this.religionService.getPantheon(code).subscribe( data => this.pantheon = data);
+    this.religionService.getGods().subscribe( data => this.gods = data );
   }
 
 }

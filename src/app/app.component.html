@@ -21,17 +21,13 @@
         <a routerLink="/history">History</a>
       </li>
       
-      <!-- Nations tab -->
+      <!-- Regions tab -->
       <li class="withsubnav navlink">
-        <a class="text-align-center" routerLink="/nations">Nations<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>        
+        <a class="text-align-center" routerLink="/nations">Regions<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>        
         <ul class="subnav">
           <li class="navlink" *ngFor="let region of regions; index as i">
-            <ul>
-                <li *ngFor="let nation of region.nations">
-                  <a routerLink="/nationindetail/{{region.code}}/{{nation.code}}">{{ nation.name }}</a>
-                </li>
-              </ul>
-            </li>
+            <a routerLink="/regions/{{region.region_id}}/">{{ region.region_name }}</a>
+          </li>
         </ul>
       </li>
       
@@ -39,8 +35,8 @@
       <li class="withsubnav navlink">
         <a class="text-align-center" routerLink="/religion">Religion<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>
         <ul class="subnav">
-          <li class="navlink" *ngFor="let religion of religions; index as i">
-            <a class="text-align-center" routerLink="/detailedreligion/{{pantheon.pantheon_id}}">{{pantheon.pantheon_id}}</a>
+          <li class="navlink" *ngFor="let pantheon of pantheons; index as i">
+            <a class="text-align-center" routerLink="/detailedreligion/{{pantheon.pantheon_id}}">{{pantheon.pantheon_name}}</a>
           </li>
         </ul>
       </li>
@@ -130,7 +126,7 @@
             <!-- simple login form with 2 input values -->
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!view">
 
-              <input type="text" name="userLogin" fromControlName="username" placeholder="Username" autocomplete="off">
+              <input type="email" name="userLogin" fromControlName="email" placeholder="email" autocomplete="off">
               <input type="password" name="userPass" fromControlName="password" placeholder="Password" autocomplete="off">
               <div>
 
@@ -146,8 +142,18 @@
               <a class="loginTabLink" href="/registerUser" style="padding:0; color:gold">Register Here!</a>
 
             </div>
-            <h4 *ngIf="view">Welcome, User!</h4>
-
+            <div *ngIf="view">
+              
+              <h4 >Welcome, User!</h4>
+              <ul>
+                <li>
+                  <a class="text-align-center" routerLink="/user-profile">User Profile</a>
+                </li>
+                <li>
+                  <a class="text-align-center" routerLink="/admin-backoffice">Admin Backoffice</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </li>
         <!-- Search Tab -->
@@ -179,12 +185,12 @@
         
         <!-- Nations tab and it's subcontent -->
         <li class="withsubnav navlink">
-          <a class="text-align-center" routerLink="/nations" (click)="toggleMenu();checkActive()">Nations<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>        
+          <a class="text-align-center" routerLink="/nations" (click)="toggleMenu();checkActive()">Regions<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>        
           <ul class="subnav">
             <li class="navlink" *ngFor="let region of regions; index as i">
               <ul>
-                <li *ngFor="let nation of region.nations">
-                  <a routerLink="/nationindetail/{{region.code}}/{{nation.code}}" (click)="toggleMenu();checkActive()">{{ nation.name }}</a>
+                <li *ngFor="let region of regions">
+                  <a routerLink="/nationindetail/{{region.region_id}}" (click)="toggleMenu();checkActive()">{{ region.region_name }}</a>
                 </li>
               </ul>
             </li>
@@ -274,7 +280,7 @@
                 <a routerLink="/history">History</a>
               </li>
               <li>
-                <a routerLink="/nations">Nations</a>
+                <a routerLink="/regions">Regions</a>
               </li>
               <li>
                 <a routerLink="/orders">Orders</a>

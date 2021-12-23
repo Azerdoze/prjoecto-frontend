@@ -6,13 +6,12 @@ import { Login } from './models/login';
 import { faSearch, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { Orders } from './models/orders';
-import { Regions } from './models/region';
-import { Religions } from './models/religions';
+import { Region } from './models/region';
+import { Pantheon } from './models/pantheon';
 
 import { NationsService } from './services/nations.service';
 import { OrdersService } from './services/orders.service';
 import { ReligionsService } from './services/religions.service';
-import { Pantheon } from './models/pantheon';
 
 
 @Component({
@@ -39,8 +38,8 @@ export class AppComponent {
   toggleUp: string = "view";
 
   
-  regions: Regions[] = this.nationService.getRegions();
-  region: Regions | undefined;
+  regions: Region[];
+  region: Region | undefined;
   
   orders: Orders[];
   order: Orders | undefined;
@@ -88,6 +87,7 @@ export class AppComponent {
     ngOnInit(): void {
       this.religionService.getPantheons().subscribe( data => this.pantheons = data );
       this.orderService.getOrders().subscribe( data => this.orders = data );
+      this.nationService.getRegions().subscribe( data => this.regions = data );
       
       this.loginForm = this.fb.group({
         email: new FormControl("", [Validators.required, Validators.email]),

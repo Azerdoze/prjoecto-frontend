@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Regions } from 'src/app/models/region';
+import { Region } from 'src/app/models/region';
 
-import { NationsService } from 'src/app/services/nations.service';
 @Component({
   selector: 'app-update-nation',
   templateUrl: './update-nation.component.html',
@@ -9,11 +8,10 @@ import { NationsService } from 'src/app/services/nations.service';
 })
 export class UpdateNationComponent implements OnInit {
 
-  regions: Regions[] = this.nationService.getRegions();
-  region: Regions | undefined;
+  regions: Region[];
+  region: Region | undefined;
   
   constructor(
-    private nationService: NationsService
   ) { }
 
   ngOnInit(): void {

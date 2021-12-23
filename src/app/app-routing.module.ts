@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
 import { NationsComponent } from './nations/nations.component';
+import { RegionComponent } from './nations/region/region.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ReligionComponent } from './religion/religion.component';
 import { TimeComponent } from './time/time.component';
@@ -37,12 +38,13 @@ const routes: Routes = [
   {path:"time", component:TimeComponent},
   {path:"history", component:HistoryComponent},
   {path:"nations", component:NationsComponent},
+  {path:"regions/:region_id", component:RegionComponent},
   {path:"religion", component:ReligionComponent},
   {path:"orders", component:OrdersComponent},
   {path:"register", component:RegisterComponent},
-  {path:"nationindetail/:regionCode/:nationCode", component:NationindetailComponent},
+  {path:"nationindetail/:nation_id", component:NationindetailComponent},
   {path:"orders/:code", component:OrderComponent},
-  {path:"detailedreligion/:code", component:DetailedreligionComponent},
+  {path:"detailedreligion/:pantheon_id", component:DetailedreligionComponent},
   {path:"search/searchresults", component:SearchresultsComponent},
   {path:"registerUser", component:RegisterUserComponent},
   {path:"admin-backoffice", component:AdminAreaComponent},
