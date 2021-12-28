@@ -5,7 +5,7 @@
     <div class="registryForm">
 
         <form [formGroup]="createGod" (ngSubmit)="onSubmit()">
-        <h5 class="red-alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</h5>
+        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
             <div>
                 <label>
                     Name
@@ -39,7 +39,9 @@
             <div>
                 <label>
                     Belongs to which Pantheon
-                    <option></option>
+                    <select name="pantheons">
+                        <option *ngFor="let pantheon of pantheons; index as i" value="{{pantheon.pantheon_id]]">{{pantheon.pantheon_name}}</option>
+                    </select>
                 </label>
             </div>
             <div>

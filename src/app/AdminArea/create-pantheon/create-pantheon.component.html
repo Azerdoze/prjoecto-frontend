@@ -4,35 +4,30 @@
     
     <div class="registryForm">
 
-        <form>
+        <form action="" [formGroup]="createPantheon" (ngSubmit)="onSubmit()">
+            <h5 class="red-alert" role="alert" *ngIf="message">{{message}}</h5>
             <div>
                 <label>
                     Name
-                    <input type="text" name="name" required="" minlength="3" maxlength="30">
+                    <input type="text" formControlName="pantheon_name" name="name" required="" minlength="3" maxlength="30">
                 </label>
             </div>
             <div>
                 <label>
                     Summary
-                    <input type="text" name="summary" required="" maxlength="200">
+                    <input type="text" formControlName="pantheon_summary" name="summary" required="" maxlength="200">
                 </label>
             </div>
             <div>
                 <label>
                     Description
-                    <textarea name="description" required="" cols="30" rows="3"></textarea>
-                </label>
-            </div>
-            <div>
-                <label>
-                    Banner
-                    <input type="file">
+                    <textarea name="description" formControlName="pantheon_description" required="" cols="30" rows="3"></textarea>
                 </label>
             </div>
             <div>
                 <label>
                     scope
-                    <input type="text" name="scope" required="" minlength="3" maxlength="30">
+                    <input type="text" formControlName="pantheon_scope" name="scope" required="" minlength="3" maxlength="30">
                 </label>
             </div>
             <div>

@@ -2,13 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { Religions } from '../models/religions';
 import { Pantheon } from '../models/pantheon';
 import { God } from '../models/god';
-
-import { DummyReligions } from '../dummyDB/dummyReligions';
-import { dummyPantheons } from '../dummyDB/dummyPantheons';
-
 @Injectable({
   providedIn: 'root'
 })

@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 
 import { Orders } from '../models/orders';
 
-// import { DummyOrders } from '../dummyDB/dummyOrders';
 
 @Injectable({
   providedIn: 'root'

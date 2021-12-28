@@ -4,52 +4,44 @@
 
     <div class="registryForm">
 
-        <form>
-            <div>
-                <label>
-                    Nation
-                    <select name="nation">
-                        <option *ngFor="let region of regions; index as i" value="{{region.region_id]]">{{ region.region_name }}</option>
-                    </select>
-                </label>
-            </div>
-            <div>
-                <label>
-                    Code
-                    <input type="text" required="" minlength="2" maxlength="4">
-                </label>
-            </div>
+        <form action="" [formGroup]="chosenNation">
+            <select name="nationtobechosen" id="">
+                <option *ngFor="let nation of nations; index as i" value="{{nation.nation_id]]">{{nation.nation_name}}</option>
+            </select>
+        </form>
+
+        <form action="" [formGroup]="updateNation">
             <div>
                 <label>
                     Name
-                    <input type="text" required="" minlength="8" maxlength="40">
+                    <input type="text" formControlname="name" required="" minlength="8" maxlength="40">
                 </label>
             </div>
             <div>
-                Short Description
-                <textarea name="shortdescription" rows="2" cols="30">
-                </textarea>
+                <label for="">
+                    Short Description
+                    <textarea name="shortdescription" formControlname="shortdescription" rows="2" cols="30">
+                    </textarea>
+                </label>
             </div>
             <div>
-                Description
-                <textarea name="description" rows="2" cols="30" required="">
-                </textarea>
+                <label for="">
+                    Description
+                    <textarea name="description" formControlname="description" rows="2" cols="30" required="">
+                    </textarea>
+                </label>
             </div>
             <div>
                 <label>
                     Hub
-                    <input type="text" required="" minlength="3" maxlength="30">
+                    <input type="text" required="" formControlname="hub" minlength="3" maxlength="30">
                 </label>
             </div>
             <div>
-                Hub Description
-                <textarea name="hubdescription" rows="2" cols="30" required="">
-                </textarea>
-            </div>
-            <div>
-                <label>
-                    Banner
-                    <input type="file">
+                <label for="">
+                    Hub Description
+                    <textarea name="hubdescription" formControlname="hubdescription" rows="2" cols="30" required="">
+                    </textarea>
                 </label>
             </div>
             <div>

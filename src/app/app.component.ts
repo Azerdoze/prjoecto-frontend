@@ -117,5 +117,6 @@ export class AppComponent {
         this.toggleForm();
       }  
     }
+    
   }
   

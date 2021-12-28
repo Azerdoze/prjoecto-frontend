@@ -1,4 +1,3 @@
-import { Email } from "./emails";
 
 export class User {
     public user_id : number;

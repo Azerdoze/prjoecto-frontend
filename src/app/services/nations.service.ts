@@ -5,8 +5,6 @@ import { Observable, of } from 'rxjs';
 import { Nation } from '../models/nationindetail';
 import { Region } from '../models/region';
 
-// import { DummyRegions } from '../dummyDB/dummy';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +18,6 @@ export class NationsService {
     headers: new HttpHeaders({
       "Content-Type":"application/json"
     })
-
   };
 
   constructor( private http: HttpClient ) { }

@@ -4,8 +4,14 @@
 
     <div class="registryForm">
 
+        <form action="" [formGroup]="chosenGod">
+            <select name="godtobechosen" id="">
+                <option *ngFor="let god of gods; index as i" value="{{god.god_id]]">{{god.god_name}}</option>
+            </select>
+        </form>
+
         <form [formGroup]="updateGod" (ngSubmit)="onSubmit()">
-        <h5 class="red-alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</h5>
+        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
             <div>
                 <label>
                     Name

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Nationtrait } from '../../models/nationtrait';
+import { Trait } from '../../models/trait';
 
 @Component({
   selector: 'app-create-nation-trait',
@@ -10,13 +10,28 @@ import { Nationtrait } from '../../models/nationtrait';
 })
 export class CreateNationTraitComponent implements OnInit {
 
-  nationTrait = new Nationtrait() ;
-  createNationTrait : FormGroup;
-  errorMEssage : string;
+  trait = new Trait() ;
+  createTrait : FormGroup;
+  Message : string;
 
   constructor( private fb : FormBuilder ) { }
 
   ngOnInit(): void {
+    this.createTrait = this.fb.group ({
+      trait_name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      nation_description: ["", [Validators.required]]
+  });
   }
-
+  onSubmit() {
+    this.Message = "";
+    if(!this.createTrait.valid) {
+      this.Message = "Please fill in all the form correctly";
+      
+      // debug
+      console.log(this.createTrait);
+    }
+    else {
+      this.Message = "Trait created successfully";
+    }
+  }
 }

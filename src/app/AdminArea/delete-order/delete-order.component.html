@@ -2,4 +2,25 @@
 
     <h1>Delete Order</h1>
     
+    <form action="" [formGroup]="deleteOrder">
+        
+        <div>
+            <label>
+                Which Order you want to delete?
+                <select name="chosenOrder">
+                    <option *ngFor="let order of orders; index as i" value="{{order.order_id]]">{{order.order_name}}</option>
+                </select>
+            </label>
+        </div>
+        <h5 class="red-alert" role="alert" *ngIf="message">{{message}}</h5>
+        <div>
+            <label>
+                <input type="checkbox" formControlName="checkbox" name="agrees" required="">
+                Please confirm if this is the item you want to delete
+            </label>
+        </div>
+        <div>
+            <button type="submit" name="send">Delete</button>
+        </div>
+    </form>
 </section>

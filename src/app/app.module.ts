@@ -20,8 +20,6 @@ import { ReligionComponent } from './religion/religion.component';
 import { TimeComponent } from './time/time.component';
 import { NationindetailComponent } from './nations/nationindetail/nationindetail.component';
 import { OrderComponent } from './order/order.component';
-import { SearchresultsComponent } from './search/searchresults/searchresults.component';
-import { RegisterComponent } from './signup/register/register.component';
 import { DetailedreligionComponent } from './religion/detailedreligion/detailedreligion.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 import { AdminAreaComponent } from './AdminArea/admin-area/admin-area.component';
@@ -55,8 +53,6 @@ import { RegionComponent } from './nations/region/region.component';
     NationindetailComponent,
     sanitizeHtmlPipe,
     OrderComponent,
-    SearchresultsComponent,
-    RegisterComponent,
     DetailedreligionComponent,
     RegisterUserComponent,
     AdminAreaComponent,

@@ -1,6 +1,26 @@
 <section class="container">
 
-    <h1>Delete Nation</h1>
-
+    <h1>Delete God</h1>
     
+    <form action="" [formGroup]="deleteNation">
+        
+        <div>
+            <label>
+                Which god you want to delete?
+                <select name="chosenNation">
+                    <option *ngFor="let nation of nations; index as i" value="{{nation.nation_id]]">{{nation.nation_name}}</option>
+                </select>
+            </label>
+        </div>
+        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+        <div>
+            <label>
+                <input type="checkbox" formControlName="checkbox" name="agrees" required="">
+                Please confirm if this is the item you want to delete
+            </label>
+        </div>
+        <div>
+            <button type="submit" name="send">Delete</button>
+        </div>
+    </form>
 </section>

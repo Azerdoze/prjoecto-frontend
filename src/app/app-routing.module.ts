@@ -8,7 +8,6 @@ import { RegionComponent } from './nations/region/region.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ReligionComponent } from './religion/religion.component';
 import { TimeComponent } from './time/time.component';
-import { RegisterComponent } from './signup/register/register.component';
 import { SearchresultsComponent } from './search/searchresults/searchresults.component';
 import { NationindetailComponent } from './nations/nationindetail/nationindetail.component';
 import { OrderComponent } from './order/order.component';
@@ -41,7 +40,6 @@ const routes: Routes = [
   {path:"regions/:region_id", component:RegionComponent},
   {path:"religion", component:ReligionComponent},
   {path:"orders", component:OrdersComponent},
-  {path:"register", component:RegisterComponent},
   {path:"nationindetail/:nation_id", component:NationindetailComponent},
   {path:"orders/:code", component:OrderComponent},
   {path:"detailedreligion/:pantheon_id", component:DetailedreligionComponent},
