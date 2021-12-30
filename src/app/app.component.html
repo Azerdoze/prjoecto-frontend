@@ -55,7 +55,7 @@
       <li>
         <button title="login-menu" (click)="toggleSub()">User Area</button>
         <div *ngIf="reveal">
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!view">
+          <form method="post" [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!view">
             <h5 class="red-alert" role="alert" *ngIf="errorMessage" style="color:red; text-transform: none; padding: 5px;">{{errorMessage}}</h5>
             <input type="email" name="email" formControlName="email" placeholder="email" autocomplete="off">
             <input type="password" name="userPass" formControlName="password" placeholder="Password" autocomplete="off">

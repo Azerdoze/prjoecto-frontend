@@ -12,7 +12,7 @@ import { NationsService } from '../../services/nations.service';
 export class UpdateNationComponent implements OnInit {
 
   nations : Nation[];
-  nation = new Nation();
+  nation : Nation | undefined;
   chosenNation : FormGroup;
   updateNation : FormGroup;
   Message : string;

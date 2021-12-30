@@ -3,17 +3,17 @@
     <h1>Create Nation Trait</h1>
     
     <div class="registryForm">
-        <form action="" [formGroup]="createTrait" (ngSubmit)="onSubmit()">
+        <form method="post" [formGroup]="createTrait" (ngSubmit)="onSubmit()">
             <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
             <div>
                 <label>
                     Trait Name
-                    <input type="text" formcontrolname="trait_name" name="name" required="" minlength="8" maxlength="40">
+                    <input type="text" formControlName="trait_name" name="name" required="" minlength="8" maxlength="40">
                 </label>
             </div>
             <div>
                 Trait Description
-                <input type="text" formcontrolname="trait_description" name="description" required="">
+                <input type="text" formControlName="trait_description" name="description" required="" minlength="8" maxlength="10000">
             </div>
             <div>
                 <button type="submit" name="send">Submit</button>

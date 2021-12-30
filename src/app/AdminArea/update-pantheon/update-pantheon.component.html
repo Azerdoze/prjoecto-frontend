@@ -1,5 +1,46 @@
 <section class="container">
 
     <h1>Update Pantheon</h1>
+
+    <div class="registryForm">
+
+        <form action="" [formGroup]="chosenPantheon">
+            <select name="pantheontobechosen" id="">
+                <option *ngFor="let pantheon of pantheons; index as i" value="{{pantheon.pantheon_id}}">{{pantheon.pantheon_name}}</option>
+            </select>
+        </form>
+
+        <form action="" [formGroup]="updatePantheon">
+            <div>
+                <label>
+                    Name
+                    <input type="text" formControlname="pantheon_name" required="" minlength="8" maxlength="40">
+                </label>
+            </div>
+            <div>
+                <label for="">
+                    Short Description
+                    <textarea name="shortdescription" formControlname="pantheon_summary" rows="2" cols="30">
+                    </textarea>
+                </label>
+            </div>
+            <div>
+                <label for="">
+                    Description
+                    <textarea name="description" formControlname="pantheon_description" rows="2" cols="30" required="">
+                    </textarea>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Scope
+                    <input type="text" required="" formControlname="pantheon_scope" minlength="3" maxlength="30">
+                </label>
+            </div>
+            <div>
+                <button type="submit" name="send">Submit</button>
+            </div>
+        </form>
+    </div>
     
 </section>

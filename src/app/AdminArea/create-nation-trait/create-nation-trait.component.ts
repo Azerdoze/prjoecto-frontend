@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Trait } from '../../models/trait';
+import { TraitService } from '../../services/trait.service';
 
 @Component({
   selector: 'app-create-nation-trait',
@@ -14,12 +15,15 @@ export class CreateNationTraitComponent implements OnInit {
   createTrait : FormGroup;
   Message : string;
 
-  constructor( private fb : FormBuilder ) { }
+  constructor(
+    private fb : FormBuilder,
+    private traitservice : TraitService
+    ) { }
 
   ngOnInit(): void {
     this.createTrait = this.fb.group ({
-      trait_name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
-      nation_description: ["", [Validators.required]]
+      trait_name: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
+      trait_description: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(10000)]]
   });
   }
   onSubmit() {
@@ -32,6 +36,7 @@ export class CreateNationTraitComponent implements OnInit {
     }
     else {
       this.Message = "Trait created successfully";
+      this.traitservice.addTrait(new Trait).subscribe( data => this.trait = data );
     }
   }
 }

@@ -6,7 +6,7 @@
 
         <form action="" [formGroup]="chosenNation">
             <select name="nationtobechosen" id="">
-                <option *ngFor="let nation of nations; index as i" value="{{nation.nation_id]]">{{nation.nation_name}}</option>
+                <option *ngFor="let nation of nations; index as i" value="{{nation.nation_id}}">{{nation.nation_name}}</option>
             </select>
         </form>
 
@@ -14,33 +14,33 @@
             <div>
                 <label>
                     Name
-                    <input type="text" formControlname="name" required="" minlength="8" maxlength="40">
+                    <input type="text" formControlname="nation_name" required="" minlength="8" maxlength="40">
                 </label>
             </div>
             <div>
                 <label for="">
                     Short Description
-                    <textarea name="shortdescription" formControlname="shortdescription" rows="2" cols="30">
+                    <textarea name="shortdescription" formControlname="nation_summary" rows="2" cols="30">
                     </textarea>
                 </label>
             </div>
             <div>
                 <label for="">
                     Description
-                    <textarea name="description" formControlname="description" rows="2" cols="30" required="">
+                    <textarea name="description" formControlname="nation_description" rows="2" cols="30" required="">
                     </textarea>
                 </label>
             </div>
             <div>
                 <label>
                     Hub
-                    <input type="text" required="" formControlname="hub" minlength="3" maxlength="30">
+                    <input type="text" required="" formControlname="nation_hub" minlength="3" maxlength="30">
                 </label>
             </div>
             <div>
                 <label for="">
                     Hub Description
-                    <textarea name="hubdescription" formControlname="hubdescription" rows="2" cols="30" required="">
+                    <textarea name="hubdescription" formControlname="nation_hub_description" rows="2" cols="30" required="">
                     </textarea>
                 </label>
             </div>

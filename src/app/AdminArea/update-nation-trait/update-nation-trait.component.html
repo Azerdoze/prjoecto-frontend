@@ -2,4 +2,30 @@
 
     <h1>Update Nation Trait</h1>
     
+    <div class="registryForm">
+
+        <form action="" [formGroup]="chosenTrait">
+            <select name="nationtobechosen" formcontrolname="chosen" id="">
+                <option *ngFor="let trait of traits; index as i" value="{{trait.trait_id}}">{{trait.trait_name}}</option>
+            </select>
+        </form>
+
+        <form action="" [formGroup]="updateTrait" (ngSubmit)="onSubmit()">
+            <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+            <div>
+                <label>
+                    Trait Name
+                    <input type="text" formControlName="trait_name" name="name" required="" minlength="8" maxlength="40">
+                </label>
+            </div>
+            <div>
+                Trait Description
+                <input type="text" formControlName="trait_description" name="description" required="">
+            </div>
+            <div>
+                <button type="submit" name="send">Submit</button>
+            </div>
+        </form>
+    </div>
+
 </section>

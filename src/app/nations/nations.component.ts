@@ -39,9 +39,6 @@ export class NationsComponent implements OnInit {
     })
 
     this.nationService.getRegions().subscribe( data => this.regions = data );
-
-    const region_id = this.route.snapshot.paramMap.get("code")
-    this.nationService.getNationsByRegion(region_id).subscribe( data => this.nations = data);
   }
 
 }
