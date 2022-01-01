@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { User } from '../models/users';
 
@@ -9,29 +8,41 @@ import { User } from '../models/users';
   providedIn: 'root'
 })
 export class AuthService {
+
+
+
   UserDBLink = "http://localhost/backend/users";
+  loginDBlink = "http://localhost/backend/login";
+  
+  private subject : BehaviorSubject<User>;
   public user: Observable<User>;
 
   private httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type":"application/json",
-      "X-Api-Key":""
+      "Content-Type":"application/json"
     })
   };
 
   constructor(
-    private router: Router,
     private http: HttpClient
-  ) {
-    
-   }
+  ) { 
+    this.subject = new BehaviorSubject<User>(JSON.parse
+      (localStorage.getItem('user')));
+      this.user = this.subject.asObservable();
+    }
+
+  public get userValue(): User {
+    return this.subject.value;
+  }
 
   // Authentication
-  login (username, password) {
-    
+  login (email, password) {
   }
+
+
   logout () {
-    
+    localStorage.removeItem('user');
+    this.subject.next(null);
   }
 
   // User CRUD
@@ -39,8 +50,8 @@ export class AuthService {
 
   }
 
-  getUser() {
-
+  getUser(id: string) {
+    return this.http.get<User>( this.UserDBLink + "/" + id);
   }
 
   createUser(user) {
@@ -48,6 +59,5 @@ export class AuthService {
   }
 
   updateUser() {
-
   }
 }

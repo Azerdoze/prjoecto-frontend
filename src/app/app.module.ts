@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { JwtModule } from '@auth0/angular-jwt';
+
 import { AppComponent } from './app.component';
 import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
@@ -79,7 +81,12 @@ import { RegionComponent } from './nations/region/region.component';
     AppRoutingModule, 
     FontAwesomeModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('access_token')
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

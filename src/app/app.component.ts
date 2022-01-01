@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
-import { Login } from './models/login';
 
 import { faSearch, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { Orders } from './models/orders';
 import { Region } from './models/region';
 import { Pantheon } from './models/pantheon';
+import { User } from './models/users';
+// import { Login } from './models/login';
 
 import { NationsService } from './services/nations.service';
 import { OrdersService } from './services/orders.service';
 import { ReligionsService } from './services/religions.service';
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -27,6 +31,9 @@ export class AppComponent {
   faTimes = faTimes;
 
   isActive:boolean = false;
+
+  loading:boolean = false;
+  submitted:boolean = false;
   
   show: boolean;
   toggle: string = "show";
@@ -47,15 +54,18 @@ export class AppComponent {
   pantheons: Pantheon[];
   pantheon: Pantheon | undefined;
   
-  login = new Login();
+  // login = new Login();
   loginForm: FormGroup;
   errorMessage: string;
   
   constructor (
+    private route: ActivatedRoute,
+    private router: Router,
     private nationService: NationsService,
     private orderService: OrdersService,
     private religionService: ReligionsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
     ) {
       
     }
@@ -93,6 +103,7 @@ export class AppComponent {
         email: new FormControl("", [Validators.required, Validators.email]),
         password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(1000)])
       });
+
     }
     
     // show or hide the login Form (which should hide after login)
@@ -108,15 +119,11 @@ export class AppComponent {
       this.errorMessage = "";
       if(!this.loginForm.valid) {
         this.errorMessage = "Username or Password Incorrect";
-        
-        // debug
-        // console.log(this.loginForm);
       }
       
       if(this.errorMessage === "") {
         this.toggleForm();
       }  
     }
-    
   }
   
