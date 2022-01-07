@@ -1,3 +1,5 @@
+import { Trait } from "./trait";
+
 export class Nation {
     public nation_id: string = "";
     public nation_name: string = "";
@@ -8,5 +10,5 @@ export class Nation {
     public nation_banner: null;
     public region_id: string = "";
     public belongs_to: string = "";
-    public traits: [];
+    public traits: Trait [];
 }

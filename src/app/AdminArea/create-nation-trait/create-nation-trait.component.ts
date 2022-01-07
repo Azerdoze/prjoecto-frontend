@@ -14,6 +14,7 @@ export class CreateNationTraitComponent implements OnInit {
   trait = new Trait() ;
   createTrait : FormGroup;
   Message : string;
+  values : any;
 
   constructor(
     private fb : FormBuilder,
@@ -32,11 +33,17 @@ export class CreateNationTraitComponent implements OnInit {
       this.Message = "Please fill in all the form correctly";
       
       // debug
-      console.log(this.createTrait);
+      // console.log(this.createTrait);
     }
     else {
-      this.Message = "Trait created successfully";
+      // acquire data from form
+      let formData = new FormData();
+
+      formData.append('trait_name', this.values.trait_name);
+      formData.append('trait_description', this.values.trait_description);
+
       this.traitservice.addTrait(new Trait).subscribe( data => this.trait = data );
+      this.Message = "Trait created successfully";
     }
   }
 }

@@ -23,10 +23,10 @@
       
       <!-- Regions tab -->
       <li class="withsubnav navlink">
-        <a class="text-align-center" routerLink="/nations">Regions<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>        
+        <a class="text-align-center" routerLink="/regions">Regions<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>        
         <ul class="subnav">
           <li class="navlink" *ngFor="let region of regions; index as i">
-            <a routerLink="/regions/{{region.region_id}}/">{{ region.region_name }}</a>
+            <a class="text-align-center" (click)="goToRegionPage(region.region_id)" >{{ region.region_name }}</a>
           </li>
         </ul>
       </li>
@@ -36,7 +36,7 @@
         <a class="text-align-center" routerLink="/religion">Religion<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>
         <ul class="subnav">
           <li class="navlink" *ngFor="let pantheon of pantheons; index as i">
-            <a class="text-align-center" routerLink="/detailedreligion/{{pantheon.pantheon_id}}">{{pantheon.pantheon_name}}</a>
+            <a class="text-align-center" (click)="goToReligionPage(pantheon.pantheon_id)">{{pantheon.pantheon_name}}</a>
           </li>
         </ul>
       </li>
@@ -55,25 +55,33 @@
       <li>
         <button title="login-menu" (click)="toggleSub()">User Area</button>
         <div *ngIf="reveal">
-          <form method="post" [formGroup]="loginForm" (ngSubmit)="onSubmit(); submit()" *ngIf="!view">
+
+            <!-- simple login form with 2 input values -->          
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" *ngIf="!view">
+            
+            <!-- error message to appear if form is incorrect -->            
             <h5 class="red-alert" role="alert" *ngIf="errorMessage" style="color:red; text-transform: none; padding: 5px;">{{errorMessage}}</h5>
-            <input type="email" name="email" formControlName="email" placeholder="email" autocomplete="off">
-            <input type="password" name="userPass" formControlName="password" placeholder="Password" autocomplete="off">
+
+            <input type="email" name="email" formControlName="user_email" placeholder="email" autocomplete="off">
+            <input type="password" name="userPass" formControlName="user_password" placeholder="Password" autocomplete="off">
+
+            <!-- login button should only be clickable once the form values are valid -->
             <div>
               <button class="login-button" name="login" type="submit" [disabled]="!loginForm.valid">login</button>
             </div>
+            
           </form>
           <div *ngIf="!view">
             <p class="loginTab">Not a registered user yet?</p>
             <a class="loginTabLink" href="/registerUser" style="padding:0; color:gold">Register Here!</a>
           </div>
           <div *ngIf="view">
-            <h4 style="padding:10px 0">Welcome, User!</h4>
+            <h4 style="padding:10px 0">Welcome!</h4>
             <ul>
               <li>
                 <a class="text-align-center" routerLink="/user-profile">User Profile</a>
               </li>
-              <li>
+              <li *ngIf="isAdmin === '1'">
                 <a class="text-align-center" routerLink="/admin-backoffice">Admin Backoffice</a>
               </li>
             </ul>
@@ -112,10 +120,10 @@
             <h5 class="red-alert" role="alert" *ngIf="errorMessage" style="color:red; text-transform: none; padding: 5px;">{{errorMessage}}</h5>
 
             <!-- simple login form with 2 input values -->
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!view">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" *ngIf="!view">
 
-              <input type="email" name="userLogin" fromControlName="email" placeholder="email" autocomplete="off">
-              <input type="password" name="userPass" fromControlName="password" placeholder="Password" autocomplete="off">
+              <input type="email" name="userLogin" fromControlName="user_email" placeholder="email" autocomplete="off">
+              <input type="password" name="userPass" fromControlName="user_password" placeholder="Password" autocomplete="off">
               <div>
 
                 <!-- login button should only be clickable once the form values are valid -->
@@ -162,7 +170,7 @@
         
         <!-- Nations tab and it's subcontent -->
         <li class="withsubnav navlink">
-          <a class="text-align-center" routerLink="/nations" (click)="toggleMenu();checkActive()">Regions<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>        
+          <a class="text-align-center" routerLink="/regions" (click)="toggleMenu();checkActive()">Regions<span class="icon-plus">&plus;</span><span class="icon-minus">&minus;</span></a>        
           <ul class="subnav">
             <li class="navlink" *ngFor="let region of regions; index as i">
               <ul>

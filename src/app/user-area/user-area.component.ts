@@ -10,7 +10,7 @@ import { User } from '../models/users';
 })
 export class UserAreaComponent implements OnInit {
 
-  user = new User ();
+  // user = new User ();
   updateUser : FormGroup;
   errorMessage: string;
 

@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl,FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
 
+import { BehaviorSubject } from 'rxjs';
 
-import { faSearch, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { Orders } from './models/orders';
 import { Region } from './models/region';
 import { Pantheon } from './models/pantheon';
 import { User } from './models/users';
-// import { Login } from './models/login';
 
 import { NationsService } from './services/nations.service';
 import { OrdersService } from './services/orders.service';
 import { ReligionsService } from './services/religions.service';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -26,7 +26,6 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'Arthan Uthyl Reborn';
   
-  faSearch = faSearch;
   faBars = faBars;
   faTimes = faTimes;
 
@@ -54,18 +53,22 @@ export class AppComponent {
   pantheons: Pantheon[];
   pantheon: Pantheon | undefined;
   
-  // login = new Login();
+  isAdmin: any;
+
   loginForm: FormGroup;
+
   errorMessage: string;
+
+  subject = new BehaviorSubject<User>(null);
   
   constructor (
-    private route: ActivatedRoute,
-    private router: Router,
     private nationService: NationsService,
     private orderService: OrdersService,
     private religionService: ReligionsService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: Router
+
     ) {
       
     }
@@ -95,17 +98,22 @@ export class AppComponent {
       this.isActive = !this.isActive;
     }
     ngOnInit(): void {
+      this.loginUserForm();
+      this.authService.autoLogin();
+      this.authService.subject.subscribe( data => this.isAdmin = data.is_admin );
+      
       this.religionService.getPantheons().subscribe( data => this.pantheons = data );
       this.orderService.getOrders().subscribe( data => this.orders = data );
       this.nationService.getRegions().subscribe( data => this.regions = data );
-      
-      this.loginForm = this.fb.group({
-        email: new FormControl("", [Validators.required, Validators.email]),
-        password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(1000)])
-      });
-
     }
     
+    loginUserForm() {
+      this.loginForm = this.fb.group({
+        user_email: new FormControl("", [Validators.required, Validators.email]),
+        user_password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(1000)])
+      });
+    }
+
     // show or hide the login Form (which should hide after login)
     toggleForm() {
       this.view = !this.view;
@@ -115,15 +123,105 @@ export class AppComponent {
         this.toggleUp = "view";
       };
     }
-    onSubmit() {
-      this.errorMessage = "";
-      if(!this.loginForm.valid) {
-        this.errorMessage = "Username or Password Incorrect";
-      }
+    onSubmit(
+      values: any
+      ) {
+        this.onLogin(values);
+
+
+        // console.log(this.onLogin);
+        
+        // run authentication to check if user is registered
+        // if user is registered login and toggleForm, else display invalid user message
       
-      if(this.errorMessage === "") {
-        this.toggleForm();
-      }  
     }
+    
+    // acquire data from login form
+    onLogin(values: any) {
+      let formData = new FormData();
+
+      console.log(values);
+      formData.append('user_email', values.user_email);
+      formData.append('user_password', values.user_password);
+
+      this.authService.login(formData).subscribe( response => {
+        // console.log(response);
+
+        this.toggleForm();
+      },error => {
+        // console.log(error.error.message);
+        this.errorMessage = error.error.message;
+      });
+    }
+
+    goToRegionPage(region_id: any) {
+      this.route.navigateByUrl("/regions",{skipLocationChange:true})
+      .then( () => {
+        this.route.navigate(["/regions/",region_id])
+      })
+    }
+
+    goToReligionPage(pantheon_id: any) {
+      // this.route.navigateByUrl("/detailedreligion",{skipLocationChange:true})
+      // .then( () => {
+        this.route.navigate(["/detailedreligion/",pantheon_id])
+      // })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
   }
   

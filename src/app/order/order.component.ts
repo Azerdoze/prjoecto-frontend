@@ -23,12 +23,12 @@ export class OrderComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if(event instanceof NavigationStart) {
-        const order_id:number = Number(event.url.split("/").pop());
+        const order_id = +event.url.split("/").pop();
         
         this.orderService.getOrder(order_id).subscribe( data => this.order = data);
       }
     })
-    const order_id:number = Number(this.route.snapshot.paramMap.get("code"));
+    const order_id = +this.route.snapshot.paramMap.get("code");
     this.orderService.getOrder(order_id).subscribe( data => this.order = data);
   }
 }

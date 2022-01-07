@@ -8,7 +8,8 @@ import { Trait } from '../models/trait';
 })
 export class TraitService {
 
-  TraitsDBLink = "http://localhost/backend/traits"
+  TraitsDBLink = "http://localhost/backend/traits";
+  TraitsByNationDBLink = "http://localhost/backend/traitsbynation";
 
   private httpOptions = {
     headers: new HttpHeaders({

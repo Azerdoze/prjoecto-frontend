@@ -11,6 +11,7 @@ export class ReligionsService {
 
   pantheonDBLink = "http://localhost/backend/pantheons";
   godsDBLink = "http://localhost/backend/gods";
+  godsByPantheonDBLink = "http://localhost/backend/godsbypantheon";
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -43,6 +44,10 @@ export class ReligionsService {
   // CRUD for Gods
   getGods(): Observable<God[]> {
     return this.http.get < God[] > ( this.godsDBLink );
+  }
+
+  getGodsByPantheon(pantheon_id:any): Observable<God[]> {
+    return this.http.get < God[] > ( this.godsByPantheonDBLink + "/" + pantheon_id);
   }
 
   getGod(god_id: number): Observable<God> {

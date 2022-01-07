@@ -12,7 +12,8 @@ import { NationsService } from '../../services/nations.service';
 })
 export class RegionComponent implements OnInit {
 
-  region: Region | undefined;
+  region_name: string;
+  region_description: string;
   nations: Nation[];
 
   constructor(
@@ -21,17 +22,27 @@ export class RegionComponent implements OnInit {
     private nationService: NationsService) { }
 
   ngOnInit(): void {
-    this.router.events.subscribe(event => {
-      if(event instanceof NavigationStart) {
-        const region_id = event.url.split("/").pop();   
+
+    let region_id = this.route.snapshot.params["region_id"];
+
+
+    // this.router.events.subscribe(event => {
+    //   if(event instanceof NavigationStart) {
+    //     const region_id = event.url.split("/").pop();   
              
-        this.nationService.getRegion(region_id).subscribe( data => this.region = data);
-        this.nationService.getNationsByRegion(region_id).subscribe( data => this.nations = data);
-      }
-    })
-    const region_id = this.route.snapshot.paramMap.get("code");
-    this.nationService.getRegion(region_id).subscribe( data => this.region = data);
-    this.nationService.getNationsByRegion(region_id).subscribe( data => this.nations = data);
+        this.nationService.getRegion(region_id).subscribe( data => {
+          this.region_name = data ["region_name"];
+          this.region_description = data ["region_description"];
+        });
+        this.nationService.getNationsByRegion(region_id).subscribe( data => {
+          this.nations = data;
+        console.log(this.nations);
+        });
+  //     }
+  //   })
+  //   const region_id = this.route.snapshot.paramMap.get("code");
+  //   this.nationService.getRegion(region_id).subscribe( data => this.region = data);
+  //   this.nationService.getNationsByRegion(region_id).subscribe( data => this.nations = data);
   }
 }
 

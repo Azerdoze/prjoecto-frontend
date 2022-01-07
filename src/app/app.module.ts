@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // pipe 
 import { sanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
@@ -10,7 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-
+// JWTHelper
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
@@ -42,7 +42,6 @@ import { UpdateOrderComponent } from './AdminArea/update-order/update-order.comp
 import { DeleteOrderComponent } from './AdminArea/delete-order/delete-order.component';
 import { UserAreaComponent } from './user-area/user-area.component';
 import { RegionComponent } from './nations/region/region.component';
-
 @NgModule({
   declarations: [
     AppComponent,

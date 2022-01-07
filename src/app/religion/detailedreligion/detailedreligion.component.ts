@@ -12,11 +12,17 @@ import { ReligionsService } from '../../services/religions.service';
 })
 export class DetailedreligionComponent implements OnInit {
 
-  // religions: Religions[];
-  pantheon: Pantheon | undefined;
+  pantheon_name: string;
+  pantheon_description: string;
+  pantheon_scope: string;
+
+  god_name: string;
+  god_alignment: string;
+  god_domains: string;
+  god_mysteries: string;
+  god_fav_weapon : string;
 
   gods: God[];
-  god: God | undefined;
 
   constructor(
     private router: Router,
@@ -26,18 +32,29 @@ export class DetailedreligionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        const code : number = Number(event.url.split("/").pop());
-        console.log(event.url, code);
+    let pantheon_id = this.route.snapshot.params["pantheon_id"];
 
-        this.religionService.getPantheon(code).subscribe( data => this.pantheon = data );
+
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationStart) {
+    //     const code : number = Number(event.url.split("/").pop());
+    //     console.log(event.url, code);
+
+        this.religionService.getPantheon(pantheon_id).subscribe( data =>{
+           this.pantheon_name = data ["pantheon_name"];
+           this.pantheon_description = data ["pantheon_description"];
+           this.pantheon_scope = data ["pantheon_scope"];
+          });
+        this.religionService.getGodsByPantheon(pantheon_id).subscribe( data =>{
+           this.gods = data;
+          //  console.log(this.gods);
+          });
       }
-    })
+    // })
 
-    const code : number = Number(this.route.snapshot.paramMap.get("code"));
-    this.religionService.getPantheon(code).subscribe( data => this.pantheon = data);
-    this.religionService.getGods().subscribe( data => this.gods = data );
-  }
+    // const code : number = Number(this.route.snapshot.paramMap.get("code"));
+    // this.religionService.getPantheon(code).subscribe( data => this.pantheon = data);
+    // this.religionService.getGods().subscribe( data => this.gods = data );
+  // }
 
 }

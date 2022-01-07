@@ -36,7 +36,7 @@ const routes: Routes = [
   {path:"", component:HomeComponent},
   {path:"time", component:TimeComponent},
   {path:"history", component:HistoryComponent},
-  {path:"nations", component:NationsComponent},
+  {path:"regions", component:NationsComponent},
   {path:"regions/:region_id", component:RegionComponent},
   {path:"religion", component:ReligionComponent},
   {path:"orders", component:OrdersComponent},

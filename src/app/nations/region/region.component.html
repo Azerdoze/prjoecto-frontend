@@ -1,18 +1,23 @@
 <section class="container">
 
-    <h1 class="detailedpage-header">{{ region.region_name }}</h1>
+    <h1 class="detailedpage-header">{{ region_name }}</h1>
 
     <h2 class="text-align-center">Description</h2>
-    <div class="text-align-center" [innerHTML]="region.region_description | sanitizeHtml"></div>
+    <div class="text-align-center" [innerHTML]="region_description | sanitizeHtml"></div>
     
     <div class="grid-area-big">
 
       <div class="div-card margin-side text-align-center background-fill-white" *ngFor="let nation of nations, index as i;">
+        
         <a routerLink="/nationindetail/{{nation.nation_id}}">
-        <div class="banner" [innerHTML]="nation.nation_banner | sanitizeHtml"></div>
-        <h3 class="golden">{{nation.nation_name}}</h3>
-        <p><em>{{nation.nation_summary}}</em></p>
+        
+          <!-- <div class="banner" [innerHTML]="nation.nation_banner | sanitizeHtml"></div> -->
+        
+          <h3 class="golden">{{nation.nation_name}}</h3>
+        
+          <p><em>{{nation.nation_summary}}</em></p>
         </a>
+        
       </div>
         
     </div>
