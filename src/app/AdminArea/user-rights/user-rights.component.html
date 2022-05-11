@@ -1,0 +1,69 @@
+<section class="container">
+
+    <h1>User Admins</h1>
+    
+    <div class="registryForm">
+
+        <!-- <form [formGroup]="rights" (onSubmit)="onSubmit(rights.value)"> -->
+
+            <h2 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h2>
+
+            <div>
+                <table>
+                    <tr>
+                        <th>Users</th>
+                        <th>Admin</th>
+                    </tr>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.user_name}}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" (click)="AdminRightsMod(user.user_id)" *ngIf="user.is_admin === '0'">
+                                    <input type="checkbox" (click)="AdminRightsMod(user.user_id)" *ngIf="user.is_admin === '1'" checked>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- <div>
+                <button type="submit" name="send">Submit</button>
+            </div> -->
+
+            <!-- <div>
+                <label>
+                    Choose a User
+                    <select name="chosen" formControlName="chosen" (change)="chooseUser()">
+                        <option *ngFor="let user of users; index as i" [ngValue]="user.user_id" required>{{user.user_name}}</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Is the user an Admin?
+                    <p class="result">{{admin}}</p>
+                </label>
+            </div>
+            <div>
+                <label *ngIf="add">
+                    If you would like to make it one, please confirm
+                    <input type="checkbox" formControlName="checkboxadd" required>
+                </label>
+            </div>
+            <div>
+                <label *ngIf="remove">
+                    If you would like to remove it as one, please confirm
+                    <input type="checkbox" formControlName="checkboxremove" required>
+                </label>
+            </div> -->
+            <!-- <div>
+                <button type="submit" name="send" *ngIf="add || remove">Submit</button>
+            </div> -->
+        <!-- </form> -->
+        <h5 class="green-alert" role="alert" *ngIf="success">
+            Admins Updated!</h5>
+    </div>
+
+</section>

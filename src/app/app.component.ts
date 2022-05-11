@@ -52,7 +52,11 @@ export class AppComponent {
   
   pantheons: Pantheon[];
   pantheon: Pantheon | undefined;
+
+  dontshowme: boolean;
   
+  userName: string;
+
   isAdmin: any;
 
   loginForm: FormGroup;
@@ -100,11 +104,20 @@ export class AppComponent {
     ngOnInit(): void {
       this.loginUserForm();
       this.authService.autoLogin();
-      this.authService.subject.subscribe( data => this.isAdmin = data.is_admin );
-      
-      this.religionService.getPantheons().subscribe( data => this.pantheons = data );
-      this.orderService.getOrders().subscribe( data => this.orders = data );
-      this.nationService.getRegions().subscribe( data => this.regions = data );
+      this.authService.subject.subscribe( (response) => {
+        if ( response ) {
+          this.view = true;
+          this.authService.subject.subscribe (data => this.userName = data.user_name)
+          this.authService.subject.subscribe( data => this.isAdmin = data.is_admin )
+          this.dontshowme = true;
+          this.retrieveNations();
+          this.retrieveOrders();
+          this.retrievePantheons();
+        }
+        else {
+          this.dontshowme = false;
+        }
+      } );
     }
     
     loginUserForm() {
@@ -123,54 +136,68 @@ export class AppComponent {
         this.toggleUp = "view";
       };
     }
-    onSubmit(
-      values: any
-      ) {
-        this.onLogin(values);
-
-
-        // console.log(this.onLogin);
-        
-        // run authentication to check if user is registered
-        // if user is registered login and toggleForm, else display invalid user message
-      
-    }
     
+    retrievePantheons() {
+      this.religionService.getPantheons().subscribe( data => this.pantheons = data );
+    }
+    retrieveOrders() {
+      this.orderService.getOrders().subscribe( data => this.orders = data );
+    }
+    retrieveNations() {
+      this.nationService.getRegions().subscribe( data => this.regions = data );
+    }
     // acquire data from login form
     onLogin(values: any) {
       let formData = new FormData();
-
-      console.log(values);
+      
+      // console.log(values);
       formData.append('user_email', values.user_email);
       formData.append('user_password', values.user_password);
-
+      
       this.authService.login(formData).subscribe( response => {
         // console.log(response);
-
-        this.toggleForm();
+        this.view = true;
+        this.authService.subject.subscribe( data => this.isAdmin = data.is_admin );
+        this.retrieveNations();
+        this.retrieveOrders();
+        this.retrievePantheons();
+        this.dontshowme =  true;
+        this.authService.subject.subscribe (data => this.userName = data.user_name)
       },error => {
-        // console.log(error.error.message);
         this.errorMessage = error.error.message;
       });
     }
-
+    
     goToRegionPage(region_id: any) {
       this.route.navigateByUrl("/regions",{skipLocationChange:true})
       .then( () => {
-        this.route.navigate(["/regions/",region_id])
+        this.route.navigate(["/region/",region_id])
+      })
+    }
+    
+    goToReligionPage(pantheon_id: any) {
+      this.route.navigate(["/detailedreligion/",pantheon_id])
+    }
+    
+    goToOrdersPage(order_id: any) {
+      this.route.navigateByUrl("/orders",{skipLocationChange:true})
+      .then( () => {
+        this.route.navigate(["/orders/", order_id])
       })
     }
 
-    goToReligionPage(pantheon_id: any) {
-      // this.route.navigateByUrl("/detailedreligion",{skipLocationChange:true})
-      // .then( () => {
-        this.route.navigate(["/detailedreligion/",pantheon_id])
-      // })
-    }
+    onSubmit( values: any ) { this.onLogin(values) };
 
-
-
-
+    onClick() { 
+      this.authService.logout()
+      this.userName = "";
+      this.loginForm.reset()
+      this.view = false;
+      window.location.reload();
+    };
+    
+    
+    
 
 
 

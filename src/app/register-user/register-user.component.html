@@ -3,44 +3,50 @@
 
     <div class="registryForm">
         <p>If you already have a user registered, <a href="/" style="color:blue">please login.</a></p>
-        <form [formGroup]="registerUser" (ngSubmit)="onSubmit()">
+        <form [formGroup]="registerUser" (ngSubmit)="onSubmit(registerUser.value)">
             <h5 class="red-alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</h5>
+
+            <h5 class="red-alert" role="alert" *ngIf="registerUser.controls['name'].errors?.required" style=" text-transform: none;">Name is required</h5>
             <div>
                 <label>
                     Name
                     <input type="text" name="name" formControlName="name" required="" minlength="3" maxlength="60">
                 </label>
             </div>
+            
+            <h5 class="red-alert" role="alert" *ngIf="registerUser.controls['email'].errors?.required" style=" text-transform: none;">Email is required</h5>
             <div>
                 <label>
                     Email
                     <input type="email" name="email" formControlName="email" required="">
                 </label>
             </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="registerUser.controls['password'].errors?.required" style=" text-transform: none;">Password is required</h5>
             <div>
                 <label>
                     Password
                     <input type="password" name="password" formControlName="password" required="" minlength="8" maxlength="1000">
                 </label>
             </div>
-            <div>
-                <label>
-                    Confirm Password
-                    <input type="password" name="confirm_password" required="" minlength="8" maxlength="1000">
-                </label>
-            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="registerUser.controls['country'].errors?.required" style=" text-transform: none;">Country is required</h5>
             <div>
                 <label>
                     Country
                     <input type="text" name="country" formControlName="country" required="" minlength="4" maxlength="20">
                 </label>
             </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="registerUser.controls['city'].errors?.required" style=" text-transform: none;">City is required</h5>
             <div>
                 <label>
                     City
                     <input type="text" name="city" formControlName="city" required="" minlength="3" maxlength="40">
                 </label>
             </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="registerUser.controls['checkbox'].errors?.required" style=" text-transform: none;">Please Agree with Terms & Conditiona</h5>
             <div>
                 <label>
                     <input type="checkbox" formControlName="checkbox" name="agrees" required="">
@@ -51,5 +57,6 @@
                 <button type="submit" name="send">Register</button>
             </div>
         </form>
+        <h5 class="red-alert" role="alert" *ngIf="success" style="color:rgb(43, 255, 0); text-transform: none; padding: 5px;">User registered successfully! Please Login</h5>
     </div>
 </section>

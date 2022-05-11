@@ -3,43 +3,52 @@
     <h1>User Profile</h1>
     
     <div class="Form">
-        <form [formGroup]="updateUser">
+        <form [formGroup]="updateUser" (ngSubmit)="updateUserData(updateUser.value)">
+            <h5 class="red-alert" role="alert" *ngIf="updateUser.controls['name'].errors?.required" style=" text-transform: none;">Name is required</h5>
             <div>
                 <label>
                     Name
                     <input type="text" name="name" formControlName="name" required="" minlength="3" maxlength="60">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="updateUser.controls['email'].errors?.required" style=" text-transform: none;">Email is required</h5>
             <div>
                 <label>
                     Email
                     <input type="email" name="email" formControlName="email" required="">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="updateUser.controls['password'].errors?.required" style=" text-transform: none;">Password is required</h5>
             <div>
                 <label>
                     Password
                     <input type="password" name="password" formControlName="password" required="" minlength="8" maxlength="1000">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="updateUser.controls['confirm_password'].errors?.required" style=" text-transform: none;">Confirm Password is required</h5>
+            <h5 class="red-alert" role="alert" *ngIf="updateUser.controls['confirm_password'].errors?.passwordMatch" style=" text-transform: none;">Passwords must match</h5>
             <div>
                 <label>
                     Confirm Password
-                    <input type="password" name="confirm_password" required="" minlength="8" maxlength="1000">
+                    <input type="password" name="confirm_password" formControlName="confirm_password" required="" minlength="8" maxlength="1000">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="updateUser.controls['country'].errors?.required" style=" text-transform: none;">Country is required</h5>
             <div>
                 <label>
                     Country
                     <input type="text" name="country" formControlName="country" required="" minlength="4" maxlength="20">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="updateUser.controls['city'].errors?.required" style=" text-transform: none;">City is required</h5>
             <div>
                 <label>
                     City
                     <input type="text" name="city" formControlName="city" required="" minlength="3" maxlength="40">
                 </label>
             </div>
+            
+            <h5 class="green-alert" role="alert" *ngIf="success">User updated successfully!</h5>
             <div>
                 <button type="submit" name="send">update</button>
             </div>

@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Trait } from '../../models/trait';
+
+import { AuthService } from '../../services/auth.service';
 import { TraitService } from '../../services/trait.service';
+
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-create-nation-trait',
@@ -11,39 +15,54 @@ import { TraitService } from '../../services/trait.service';
 })
 export class CreateNationTraitComponent implements OnInit {
 
+  public Editor = ClassicEditor
+
   trait = new Trait() ;
   createTrait : FormGroup;
   Message : string;
-  values : any;
+  success: boolean;
+  isAdmin : any;
 
   constructor(
     private fb : FormBuilder,
-    private traitservice : TraitService
+    private traitservice : TraitService,
+    private authservice: AuthService
     ) { }
 
   ngOnInit(): void {
+    this.authservice.autoLogin();
+    this.authservice.subject.subscribe( data => this.isAdmin = data.is_admin );
+
+    this.createTraitForm();
+  }
+
+  createTraitForm () {   
     this.createTrait = this.fb.group ({
       trait_name: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(40)]],
       trait_description: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(10000)]]
   });
   }
-  onSubmit() {
+  
+  CreateNationTraitData(values: any) {
+    let form = new FormData();
+
+    form.append('trait_name', values.trait_name);
+    form.append('trait_description', values.trait_description);
+
+    this.traitservice.addTrait(form).subscribe( response => {
+      // console.log(response)
+      this.success = true;
+    } );
+  }
+
+  onSubmit(values: any) {
+
     this.Message = "";
+
     if(!this.createTrait.valid) {
       this.Message = "Please fill in all the form correctly";
-      
-      // debug
-      // console.log(this.createTrait);
-    }
-    else {
-      // acquire data from form
-      let formData = new FormData();
 
-      formData.append('trait_name', this.values.trait_name);
-      formData.append('trait_description', this.values.trait_description);
-
-      this.traitservice.addTrait(new Trait).subscribe( data => this.trait = data );
-      this.Message = "Trait created successfully";
     }
+    else {  this.CreateNationTraitData(values)  }
   }
 }

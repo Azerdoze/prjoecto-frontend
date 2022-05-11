@@ -27,6 +27,7 @@ nav {
     text-decoration: none;
     display: block;
     padding: 10px;
+    cursor: pointer;
   }
   li, li a{
     color: #fff;
@@ -236,8 +237,10 @@ form .ng-invalid.ng-touched {
       padding: 1rem 5.2rem;
     }
   }
+}
+@media only screen and (max-width: 450px) {
   .socialIcons {
-    grid-template-columns: 40px 40px;
+    grid-template-columns: repeat(2, 50px) !important;
     gap: 5px;
   }
   .socialIcons .socialIcon {
@@ -323,7 +326,7 @@ footer h2{
 // Social Icons Tab
 .socialIcons {
   display: grid;
-  grid-template-columns: 60px 60px 60px 60px;
+  grid-template-columns: repeat(4, 60px);
   grid-template-rows: auto;
   column-gap: 10px;
   justify-content: center;
@@ -339,6 +342,9 @@ footer h2{
   }
   .socialIcon:hover {
     background-color: #9d0a0e;
+  }
+  a {
+    width: 55px;
   }
 }
 

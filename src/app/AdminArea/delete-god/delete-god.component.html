@@ -2,25 +2,30 @@
 
     <h1>Delete God</h1>
     
-    <form action="" [formGroup]="deleteGod">
-        
-        <div>
-            <label>
-                Which god you want to delete?
-                <select name="chosenGod">
-                    <option *ngFor="let god of gods; index as i" value="{{god.god_id]]">{{god.god_name}}</option>
-                </select>
-            </label>
-        </div>
+    <form action="" [formGroup]="deleteGod" (ngSubmit)="onSubmit()">
+        <h5 class="red-alert" role="alert" *ngIf="deleteGod.controls['chosen'].errors?.required" style=" text-transform: none;">Please Choose a God</h5>
         <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
         <div>
             <label>
-                <input type="checkbox" formControlName="checkbox" name="agrees" required="">
-                Please confirm if this is the item you want to delete
+                Which god you want to delete?
+                <select name="chosenGod" formControlName="chosen" (change)="chooseGod()" required="">
+                    <option *ngFor="let god of gods" [ngValue]="god.god_id">{{god.god_name}}</option>
+                </select>
+            </label>
+        </div>
+
+        <h5 class="red-alert" role="alert" *ngIf="deleteGod.controls['checkbox'].errors?.required" style=" text-transform: none;">Please Confirm</h5>
+        <div>
+            <label>
+                is this the item you want to delete?
+                <input type="checkbox" formControlName="checkbox" required="">
             </label>
         </div>
         <div>
             <button type="submit" name="send">Delete</button>
         </div>
     </form>
+
+    <h5 class="green-alert" role="alert" *ngIf="success">God Deleted successfully!</h5>
+
 </section>

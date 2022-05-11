@@ -2,25 +2,28 @@
 
     <h1>Delete Trait</h1>
     
-    <form action="" [formGroup]="deleteTrait">
-        
-        <div>
-            <label>
-                Which Trait you want to delete?
-                <select name="chosenTrait">
-                    <option *ngFor="let trait of traits; index as i" value="{{trait.trait_id]]">{{trait.trait_name}}</option>
-                </select>
-            </label>
-        </div>
+    <form [formGroup]="deleteTrait" (ngSubmit)="onSubmit()">
+
+        <h5 class="red-alert" role="alert" *ngIf="deleteTrait.controls['chosen'].errors?.required" style=" text-transform: none;">Please Choose a Trait</h5>
         <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
         <div>
             <label>
-                <input type="checkbox" formControlName="checkbox" name="agrees" required="">
-                Please confirm if this is the item you want to delete
+                Which Trait you want to delete?
+                <select name="chosenTrait" formControlName="chosen" (change)="chooseTrait()" required="">
+                    <option *ngFor="let trait of traits; index as i" [ngValue]="trait.trait_id">{{trait.trait_name}}</option>
+                </select>
+            </label>
+        </div>
+        <h5 class="red-alert" role="alert" *ngIf="deleteTrait.controls['checkbox'].errors?.required" style=" text-transform: none;">Please Confirm</h5>
+        <div>
+            <label>
+                is this the item you want to delete?
+                <input type="checkbox" formControlName="checkbox" required="">
             </label>
         </div>
         <div>
             <button type="submit" name="send">Delete</button>
         </div>
     </form>
+    <h5 class="green-alert" role="alert" *ngIf="success">Trait Deleted successfully!</h5>
 </section>

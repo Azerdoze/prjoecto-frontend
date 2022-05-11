@@ -1,21 +1,24 @@
 <section class="container">
 
-    <h1>Delete God</h1>
+    <h1>Delete Nation</h1>
     
-    <form action="" [formGroup]="deleteNation">
+    <form action="" [formGroup]="deleteNation" (ngSubmit)="onSubmit()">
         
+        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+        <h5 class="red-alert" role="alert" *ngIf="deleteNation.controls['chosen'].errors?.required" style=" text-transform: none;">Please Choose a Nation</h5>
         <div>
             <label>
-                Which god you want to delete?
-                <select name="chosenNation">
-                    <option *ngFor="let nation of nations; index as i" value="{{nation.nation_id]]">{{nation.nation_name}}</option>
+                Which Trait you want to delete?
+                <select name="chosen" formControlName="chosen" (change)="chooseNation($event)" required="">
+                    <option *ngFor="let nation of nations; index as i" [ngValue]="nation.nation_id">{{nation.nation_name}}</option>
                 </select>
             </label>
         </div>
-        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+
+        <h5 class="red-alert" role="alert" *ngIf="deleteNation.controls['checkbox'].errors?.required" style=" text-transform: none;">Please Confirm</h5>
         <div>
             <label>
-                <input type="checkbox" formControlName="checkbox" name="agrees" required="">
+                <input type="checkbox" formControlName="checkbox" name="checkbox" required="">
                 Please confirm if this is the item you want to delete
             </label>
         </div>
@@ -23,4 +26,5 @@
             <button type="submit" name="send">Delete</button>
         </div>
     </form>
+    <h5 class="green-alert" role="alert" *ngIf="success">Nation Deleted successfully!</h5>
 </section>

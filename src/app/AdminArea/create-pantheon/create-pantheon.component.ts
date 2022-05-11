@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Pantheon } from '../../models/pantheon';
+import { AuthService } from '../../services/auth.service';
 import { ReligionsService } from '../../services/religions.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-create-pantheon',
@@ -11,31 +13,57 @@ import { ReligionsService } from '../../services/religions.service';
 })
 export class CreatePantheonComponent implements OnInit {
 
+  public Editor = ClassicEditor
   pantheon = new Pantheon();
   createPantheon : FormGroup;
   message : string;
+  isAdmin: any;
+
+  success: boolean;
 
   constructor(
     private fb: FormBuilder,
-    private religionService : ReligionsService
+    private religionService : ReligionsService,
+    private authservice: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.CreatePantheonForm();
+
+    this.authservice.autoLogin();
+    this.authservice.subject.subscribe( data => this.isAdmin = data.is_admin );
+  }
+
+  CreatePantheonForm() {
     this.createPantheon = this.fb.group ({
-      pantheon_name : ["", [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
-      pantheon_summary : ["", [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
-      pantheon_description : ["", [Validators.required, Validators.minLength(3), Validators.maxLength(10000)]],
-      pantheon_scope : ["", [Validators.required, Validators.minLength(3), Validators.maxLength(40)]]
+      name : ["", [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      summary : ["", [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
+      description : ["", [Validators.required, Validators.minLength(3), Validators.maxLength(10000)]],
+      scope : ["", [Validators.required, Validators.minLength(3), Validators.maxLength(40)]]
     })
   }
 
-  onSubmit() {
+  CreatePantheonData(values: any) {
+    let form = new FormData();
+
+    form.append('pantheon_name', values.name);
+    form.append('pantheon_summary', values.summary);
+    form.append('pantheon_description', values.description);
+    form.append('pantheon_scope', values.scope);
+
+    this.religionService.addPantheon(form).subscribe( response => {
+      // console.log(response)
+      this.success = true;
+    } );
+  }
+
+  onSubmit(values: any) {
     this.message = "";
     if(!this.createPantheon.valid) {
       this.message = "Please fill in all the form entries correctly";
     }
     else {
-      this.message = "Pantheon created Successfully";
+      this.CreatePantheonData(values)
     }
   }
 }

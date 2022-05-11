@@ -2,25 +2,29 @@
 
     <h1>Delete Order</h1>
     
-    <form action="" [formGroup]="deleteOrder">
+    <form action="" [formGroup]="deleteOrder" (ngSubmit)="onSubmit()">
+        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
         
+        <h5 class="red-alert" role="alert" *ngIf="deleteOrder.controls['chosen'].errors?.required" style=" text-transform: none;">Please Choose an Order</h5>
         <div>
             <label>
                 Which Order you want to delete?
-                <select name="chosenOrder">
-                    <option *ngFor="let order of orders; index as i" value="{{order.order_id]]">{{order.order_name}}</option>
+                <select name="chosenOrder" formControlName="chosen" (change)="chooseOrder()" required="">
+                    <option *ngFor="let order of orders; index as i" [ngValue]="order.order_id">{{order.order_name}}</option>
                 </select>
             </label>
         </div>
-        <h5 class="red-alert" role="alert" *ngIf="message">{{message}}</h5>
+        
+        <h5 class="red-alert" role="alert" *ngIf="deleteOrder.controls['checkbox'].errors?.required" style=" text-transform: none;">Please Confirm</h5>
         <div>
             <label>
-                <input type="checkbox" formControlName="checkbox" name="agrees" required="">
                 Please confirm if this is the item you want to delete
+                <input type="checkbox" formControlName="checkbox" name="agrees" required="">
             </label>
         </div>
         <div>
             <button type="submit" name="send">Delete</button>
         </div>
     </form>
+    <h5 class="green-alert" role="alert" *ngIf="success">Order Deleted successfully!</h5>
 </section>

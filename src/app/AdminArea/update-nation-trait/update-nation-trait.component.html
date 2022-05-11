@@ -4,28 +4,36 @@
     
     <div class="registryForm">
 
-        <form action="" [formGroup]="chosenTrait">
-            <select name="nationtobechosen" formcontrolname="chosen" id="">
-                <option *ngFor="let trait of traits; index as i" value="{{trait.trait_id}}">{{trait.trait_name}}</option>
-            </select>
+        <form [formGroup]="chosenTrait">
+            <label>
+                Trait to be Changed
+                <select name="nationtobechosen" formControlName="chosen" (change)="chooseTrait()">
+                    <option *ngFor="let trait of traits; index as i" [ngValue]="trait.trait_id">{{trait.trait_name}}</option>
+                </select>
+            </label>
         </form>
 
-        <form action="" [formGroup]="updateTrait" (ngSubmit)="onSubmit()">
+        <form action="" [formGroup]="updateTrait" (ngSubmit)="onSubmit(updateTrait.value)">
             <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateTrait.controls['name'].errors?.required" style=" text-transform: none;">Name is required</h5>
             <div>
                 <label>
                     Trait Name
-                    <input type="text" formControlName="trait_name" name="name" required="" minlength="8" maxlength="40">
+                    <input type="text" formControlName="name" name="name" required="" minlength="8" maxlength="40">
                 </label>
             </div>
-            <div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateTrait.controls['description'].errors?.required" style=" text-transform: none;">A description is required</h5>
+            <div class="box">
                 Trait Description
-                <input type="text" formControlName="trait_description" name="description" required="">
+                <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" formControlName="description" name="description" required="" maxlength="65535"></ckeditor>
             </div>
             <div>
                 <button type="submit" name="send">Submit</button>
             </div>
         </form>
+        <h5 class="green-alert" role="alert" *ngIf="success">Trait Updated successfully!</h5>
     </div>
 
 </section>

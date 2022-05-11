@@ -12,7 +12,7 @@
       
       <!-- <div class="banner" [innerHTML]="order.order_banner | sanitizeHtml"></div> -->
       <h3 class="golden">{{order.order_name}}</h3>
-      <p><em>{{order.order_summary}}</em></p>
+      <p><em [innerHTML]="order.order_summary | sanitizeHtml"></em></p>
        
       </a>
         

@@ -5,7 +5,6 @@ import { tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 
-import { Login } from "../models/login";
 import { User } from '../models/users';
 
 interface AuthData {
@@ -17,28 +16,46 @@ interface AuthData {
 })
 export class AuthService {
 
-  UserDBLink = "http://localhost/backend/users";
-  loginDBlink = "http://localhost/backend/login";
+  // UserDBLink = "http://localhost/backend/users";
+
+  // userRightsDBLink = "http://localhost/backend/userrights";
+
+  // loginDBlink = "http://localhost/backend/login";
+  UserDBLink = "https://arthan-uthyl.me.uk/backend/users";
+
+  userRightsDBLink = "https://arthan-uthyl.me.uk/backend/userrights";
+
+  loginDBlink = "https://arthan-uthyl.me.uk/backend/login";
+
+
+  ParsedJWT;
+  httpOptions;
   
   subject = new BehaviorSubject<User>(null);
+  
   public user: Observable<User>;
-
-  private httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type":"application/json"
-    })
-  };
 
   constructor(
     private http: HttpClient,
     private JWT: JwtHelperService,
     private router: Router
-  ) { 
-    
-    }
+  ) { }
 
   public get userValue(): User {
     return this.subject.value;
+  }
+
+  // Method to get the JWT Token
+  getJWT () {
+    const JWTo = localStorage.getItem("authToken");
+
+    this.ParsedJWT = JSON.parse(JWTo)["X-Auth-Token"];
+
+    this.httpOptions = {
+        headers: new HttpHeaders({
+          "X-Auth-Token":this.ParsedJWT
+        })
+      };
   }
 
   handleAuth(JWToken:any){
@@ -46,7 +63,6 @@ export class AuthService {
   
     // using JWTHelper
     const JWT = this.JWT.decodeToken(localStorage.getItem('authToken'));
-    console.log(JWT);
 
     const newUser = new User(
       JWT.user_id,
@@ -62,15 +78,12 @@ export class AuthService {
     this.subject.next(newUser);
   }
 
-  private token: string;
   // Authentication
   login (data:any) {
     let object = {};
     data.forEach((value, key) => object[key] = value);
 
     let jsonConverted = JSON.stringify(object);
-    
-    console.log(jsonConverted);
 
     return this.http.post<AuthData>(this.loginDBlink, jsonConverted)
     .pipe(tap( response => this.handleAuth(response)));
@@ -93,7 +106,7 @@ export class AuthService {
       is_admin: boolean,
       JWToken: string
     } = this.JWT.decodeToken(localStorage.getItem('authToken'));
-  
+    
     if(!userData) {
       return 0;
     };
@@ -110,30 +123,58 @@ export class AuthService {
     );
 
     this.subject.next(loadedUser);
-    
-    // console.log(loadedUser);
-    
+
     return loadedUser;
+
   }
 
   logout () {
-    localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
     this.subject.next(null);
   }
 
   // User CRUD
-  getUsers () {
-
+  getUsers ():Observable<User[]> {
+    return this.http.get<User[]>(this.UserDBLink);
   }
 
-  getUser(id: string) {
+  getUser(id: number) {
     return this.http.get<User>( this.UserDBLink + "/" + id);
   }
 
-  createUser(user: User) {
-      return this.http.post < User > ( this.UserDBLink , user, this.httpOptions);
+  createUser(data: any) {
+
+    let object = {};
+    data.forEach((value, key) => object[key] = value);
+    let jsonConverted = JSON.stringify(object);
+
+      return this.http.post ( this.UserDBLink , jsonConverted);
   }
 
-  updateUser() {
+  updateUser(id: number, data: any) {
+    
+    const url = this.UserDBLink + "/" + id;
+    
+    // convert form data to JSON
+    let object = {};
+    data.forEach((value, key) => object[key] = value);
+    let jsonConverted = JSON.stringify(object);
+
+    return this.http.put (url, jsonConverted);
+  }
+
+  adminRights(id:any) {
+    const url = this.userRightsDBLink;
+
+    this.getJWT()
+
+    return this.http.post(url, {user_id : id}, this.httpOptions)
+  }
+
+  deleteUser(user_id:number) {
+
+    this.getJWT()
+
+    return this.http.delete ( this.UserDBLink + "/" + user_id, this.httpOptions );
   }
 }

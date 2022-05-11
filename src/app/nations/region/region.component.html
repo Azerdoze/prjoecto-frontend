@@ -15,7 +15,7 @@
         
           <h3 class="golden">{{nation.nation_name}}</h3>
         
-          <p><em>{{nation.nation_summary}}</em></p>
+          <p><em [innerHTML]="nation.nation_summary | sanitizeHtml"></em></p>
         </a>
         
       </div>

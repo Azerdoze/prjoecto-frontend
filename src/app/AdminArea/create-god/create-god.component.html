@@ -4,43 +4,52 @@
 
     <div class="registryForm">
 
-        <form [formGroup]="createGod" (ngSubmit)="onSubmit()">
-        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+        <form [formGroup]="createGod" (ngSubmit)="onSubmit(createGod.value)">
+            
+            <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+
+
+            <h5 class="red-alert" role="alert" *ngIf="createGod.controls['name'].errors?.required" style=" text-transform: none;">Name is required</h5>
             <div>
                 <label>
                     Name
-                    <input type="text" name="god" formControlName="name" required="" minlength="8" maxlength="40">
+                    <input type="text" name="god" formControlName="name" required="" minlength="3" maxlength="40">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="createGod.controls['alignment'].errors?.required" style=" text-transform: none;">Alignment is required</h5>
             <div>
                 <label>
                     alignment
-                <input type="text" name="alignment" formControlName="summary" required="" minlength="2" maxlength="15">
+                    <input type="text" name="alignment" formControlName="alignment" required="" minlength="2" maxlength="15">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="createGod.controls['domains'].errors?.required" style=" text-transform: none;">At least one Domains is required</h5>
             <div>
                 <label>
                     God Domains
                     <input type="text" name="domains" formControlName="domains" required="" minlength="8" maxlength="50">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="createGod.controls['mysteries'].errors?.required" style=" text-transform: none;">At least one Mystery is required</h5>
             <div>
                 <label>
                     God Mysteries
                     <input type="text" name="mysteries" formControlName="mysteries" required="" minlength="8" maxlength="50">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="createGod.controls['favweapon'].errors?.required" style=" text-transform: none;">A Favoured Weapon is required</h5>
             <div>
                 <label>
                     God's Favoured Weapon
                     <input type="text" name="favweapon" formControlName="favweapon" required=""  minlength="3" maxlength="50">
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="createGod.controls['pantheon'].errors?.required" style=" text-transform: none;">Please choose a pantheon</h5>
             <div>
                 <label>
                     Belongs to which Pantheon
-                    <select name="pantheons">
-                        <option *ngFor="let pantheon of pantheons; index as i" value="{{pantheon.pantheon_id]]">{{pantheon.pantheon_name}}</option>
+                    <select name="pantheons" formControlName="pantheon" (change)="choosePantheon($event)">
+                        <option *ngFor="let pantheon of pantheons" [ngValue]="pantheon.pantheon_id">{{pantheon.pantheon_name}}</option>
                     </select>
                 </label>
             </div>
@@ -48,5 +57,6 @@
                 <button type="submit" name="send">Register</button>
             </div>
         </form>
+        <h5 class="green-alert" role="alert" *ngIf="success">God Created successfully!</h5>
     </div>
 </section>

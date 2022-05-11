@@ -2,4 +2,121 @@
 
     <h1>Update Order</h1>
     
+    <div class="registryForm">
+
+        <form [formGroup]="chosenOrder">
+            <label>
+                Choose a Order to be Edited
+                <select name="chosen" formControlName="chosen" (change)="chooseOrder()">
+                    <option *ngFor="let order of orders" [ngValue]="order.order_id">{{order.order_name}}</option>
+                </select>
+            </label>
+        </form>
+
+        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+
+        <form [formGroup]="updateOrder" (ngSubmit)="onSubmit(updateOrder.value)">
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['name'].errors?.required" style=" text-transform: none;">Name is required</h5>
+            <div>
+                <label>
+                    Name
+                    <input type="text" name="name" formControlName="name" required="" minlength="3" maxlength="30">
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['truename'].errors?.required" style=" text-transform: none;">A Formal Name is required</h5>
+            <div>
+                <label>
+                    Official name
+                    <input type="text" name="truename" formControlName="truename" required="" minlength="3" maxlength="30">
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['summary'].errors?.required" style=" text-transform: none;">A Short Description is required</h5>
+            <div class="box">
+                <label>
+                    Summary (max 150 characters)
+                    <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" name="summary" formControlName="summary" required="" maxlength="150"></ckeditor>
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['description'].errors?.required" style=" text-transform: none;">A Description is required</h5>
+            <div class="box">
+                <label>
+                    Description
+                    <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" name="description" formControlName="description" required="" maxlength="65535" cols="30" rows="3"></ckeditor>
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['scope'].errors?.required" style=" text-transform: none;">A Scope is required</h5>
+            <div>
+                <label>
+                    scope
+                    <input type="text" name="scope" formControlName="scope" required="" minlength="3" maxlength="30">
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['alignment'].errors?.required" style=" text-transform: none;">An Alignment is required</h5>
+            <div>
+                <label>
+                    alignment
+                    <input type="text" name="alignment" formControlName="alignment" required="" minlength="2" maxlength="20">
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['headquarters'].errors?.required" style=" text-transform: none;">A location for the headquarters is required</h5>
+            <div>
+                <label>
+                    headquarters
+                    <input type="text" name="headquarters" formControlName="headquarters" required="" minlength="3" maxlength="20">
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['values'].errors?.required" style=" text-transform: none;">values are required</h5>
+            <div>
+                <label>
+                    Values
+                    <input type="text" name="values" formControlName="values" required="" minlength="3" maxlength="60">
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['goals'].errors?.required" style=" text-transform: none;">goals are required</h5>
+            <div class="box">
+                <label>
+                    Goals (max 150 characters)
+                    <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" name="goals" formControlName="goals" required="" minlength="3" maxlength="150"></ckeditor>
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['allies'].errors?.required" style=" text-transform: none;">allies are required</h5>
+            <div>
+                <label>
+                    Allies
+                    <input type="text" name="allies" formControlName="allies" required="" minlength="3" maxlength="80">
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['enemies'].errors?.required" style=" text-transform: none;">enemies are required</h5>
+            <div>
+                <label>
+                    Enemies
+                    <input type="text" name="enemies" formControlName="enemies" required="" minlength="3" maxlength="80">
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateOrder.controls['rivals'].errors?.required" style=" text-transform: none;">rivals are required</h5>
+            <div>
+                <label>
+                    Rivals
+                    <input type="text" name="rivals" formControlName="rivals" required="" minlength="3" maxlength="80">
+                </label>
+            </div>
+            <div>
+                <button type="submit" name="send">Submit</button>
+            </div>
+        </form>
+        <h5 class="green-alert" role="alert" *ngIf="success">Order Updated successfully!</h5>
+    </div>
+
 </section>

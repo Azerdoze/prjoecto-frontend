@@ -12,9 +12,11 @@ import { ReligionsService } from '../../services/religions.service';
 export class DeleteGodComponent implements OnInit {
 
   gods : God[];
-  god = new God();
+
   deleteGod : FormGroup;
   Message : string;
+
+  success: boolean;
 
   constructor(
     private fb : FormBuilder,
@@ -22,21 +24,55 @@ export class DeleteGodComponent implements OnInit {
      ) { }
 
   ngOnInit(): void {
-    this.deleteGod = this.fb.group ({
-      checkbox: ["", [Validators.required]],
-    });
+    this.deleteGodForm()
     this.religionService.getGods().subscribe( data => this.gods = data );
   }
+
+  // Form Method
+  deleteGodForm() {
+    this.deleteGod = this.fb.group ({
+      chosen: ["", [Validators.required]],
+      checkbox: ["", [Validators.required]]
+    });
+  }
+
+  // choose Trait using select dropdown
+  chooseGod() {
+    // turning the value into a string so it matches it's id
+    let id = this.deleteGod.controls.chosen.value;
+
+    // turning it's value to the one obtained via string
+    this.godId.setValue(id, {
+      onlySelf: true
+    })
+  }
+
+  // getter method to access formcontrols
+  get godId() {
+    return this.deleteGod.get('chosen');
+  }
+
+  DeleteTraitData() {
+
+    let id = this.deleteGod.controls.chosen.value;
+
+    this.religionService.deleteGod(id).subscribe( response => {
+      // console.log(response);
+      this.success = true;
+    });
+  }
+
   onSubmit() {
     this.Message = "";
     if(!this.deleteGod.valid) {
       this.Message = "Please fill in all the form correctly";
       
       // debug
-      console.log(this.deleteGod);
+      // console.log(this.deleteGod);
     }
     else {
-      this.Message = "God deleted successfully";
+      this.DeleteTraitData()
+      this.religionService.getGods().subscribe( data => this.gods = data );
     }
   }
 }

@@ -1,0 +1,39 @@
+h1 {
+    padding: 15px 0;
+}
+div {
+    padding: 5px;
+}
+.registryForm {
+    text-align: center;
+}
+form .ng-invalid.ng-touched {
+    border: 2px solid #F00;
+}
+.red-alert {
+    color: red;
+    text-shadow: 1px 1px 1px black;
+    font-weight: 800;
+}
+.green-alert {
+    color: rgb(2, 194, 2);
+    text-shadow: 1px 1px 1px #000;
+    font-weight: 800;
+    padding: 5px;
+}
+table {
+    margin: 0 auto;
+    th {
+        text-transform: uppercase;
+        font-weight: 800;
+        padding: 0 15px 15px;
+        font-size: 1.2em;
+    }
+    td {
+        padding: 7px 15px
+    }
+}
+.result {
+    padding-top: 15px;
+    font-weight: 800;
+}

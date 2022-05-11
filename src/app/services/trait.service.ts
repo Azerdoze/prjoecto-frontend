@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { Trait } from '../models/trait';
 @Injectable({
@@ -8,18 +8,23 @@ import { Trait } from '../models/trait';
 })
 export class TraitService {
 
-  TraitsDBLink = "http://localhost/backend/traits";
-  TraitsByNationDBLink = "http://localhost/backend/traitsbynation";
+  // TraitsDBLink = "http://localhost/backend/traits";
+  // TraitsToNationDBLink = "http://localhost/backend/traitstonation";
+  TraitsDBLink = "http://arthan-uthyl.me.uk/backend/traits";
+  TraitsToNationDBLink = "http://arthan-uthyl.me.uk/backend/traitstonation";
 
-  private httpOptions = {
+  JWT = localStorage.getItem("authToken");
+
+  parsedJWT = JSON.parse(this.JWT)["X-Auth-Token"];
+  
+  httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type":"application/json"
-    })
-
+      "X-Auth-Token":this.parsedJWT
+    }) 
   };
 
   constructor( private http: HttpClient ) { }
-
+  
   getTraits(): Observable<Trait[]> {
     return this.http.get < Trait[] > ( this.TraitsDBLink );
   }
@@ -27,16 +32,47 @@ export class TraitService {
   getTrait(trait_id: number): Observable<Trait> {
     return this.http.get < Trait > (this.TraitsDBLink + "/" + trait_id ) ;
   }
+  
+  addTrait(data: any) {
+    
+    // convert form data to JSON
+    let object = {};
+    data.forEach((value, key) => object[key] = value);
+    let jsonConverted = JSON.stringify(object);
 
-  addTrait(trait: Trait) {
-    return this.http.post < Trait > ( this.TraitsDBLink , trait, this.httpOptions);
+    return this.http.post ( this.TraitsDBLink , jsonConverted, this.httpOptions);
   }
 
-  updateTrait(trait_id:number): Observable<Trait> {
-    return this.http.put <Trait> ( this.TraitsDBLink + "/" + trait_id, this.httpOptions );
+  giveTraittoNation(data : any) {
+    // convert form data to JSON
+    let object = {};
+    data.forEach((value, key) => object[key] = value);
+    let jsonConverted = JSON.stringify(object);
+
+    let url = this.TraitsToNationDBLink
+
+    return this.http.post ( url, jsonConverted, this.httpOptions);
   }
 
-  deleteTrait(trait_id:number): Observable<Trait> {
-    return this.http.delete <Trait> ( this.TraitsDBLink + "/" + trait_id, this.httpOptions );
+  removeTraitfromNation(trait_id: number, nation_id: string) {
+    
+    let id = trait_id + "&" + nation_id;
+    let url = this.TraitsToNationDBLink + "/" + id
+    return this.http.delete ( url, this.httpOptions );
+  }
+
+
+  updateTrait(trait_id:number, data: any) {
+
+    // convert form data to JSON
+    let object = {};
+    data.forEach((value, key) => object[key] = value);
+    let jsonConverted = JSON.stringify(object);
+
+    return this.http.put ( this.TraitsDBLink + "/" + trait_id, jsonConverted, this.httpOptions );
+  }
+
+  deleteTrait(trait_id:number) {
+    return this.http.delete ( this.TraitsDBLink + "/" + trait_id, this.httpOptions );
   }
 }

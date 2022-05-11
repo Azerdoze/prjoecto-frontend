@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // pipe 
 import { sanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
@@ -12,6 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 // JWTHelper
 import { JwtModule } from '@auth0/angular-jwt';
+
+// CKEditor
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { AppComponent } from './app.component';
 import { HistoryComponent } from './history/history.component';
@@ -42,6 +45,11 @@ import { UpdateOrderComponent } from './AdminArea/update-order/update-order.comp
 import { DeleteOrderComponent } from './AdminArea/delete-order/delete-order.component';
 import { UserAreaComponent } from './user-area/user-area.component';
 import { RegionComponent } from './nations/region/region.component';
+import { GiveTraitComponent } from './AdminArea/give-trait/give-trait.component';
+import { RemoveTraitComponent } from './AdminArea/remove-trait/remove-trait.component';
+import { UserRightsComponent } from './AdminArea/user-rights/user-rights.component';
+import { DeleteUserComponent } from './AdminArea/delete-user/delete-user.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,9 +81,14 @@ import { RegionComponent } from './nations/region/region.component';
     UpdateOrderComponent,
     DeleteOrderComponent,
     UserAreaComponent,
-    RegionComponent
+    RegionComponent,
+    GiveTraitComponent,
+    RemoveTraitComponent,
+    UserRightsComponent,
+    DeleteUserComponent
   ],
   imports: [
+    CKEditorModule,
     BrowserModule,
     AppRoutingModule, 
     FontAwesomeModule,

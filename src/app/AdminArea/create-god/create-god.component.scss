@@ -1,3 +1,6 @@
+h1 {
+    padding: 15px 0;
+}
 div {
     padding: 5px;
 }
@@ -11,4 +14,11 @@ form .ng-invalid.ng-touched {
     color: red;
     text-shadow: 1px 1px 1px black;
     font-weight: 800;
+    padding: 5px;
+}
+.green-alert {
+    color: rgb(2, 194, 2);
+    text-shadow: 1px 1px 1px #000;
+    font-weight: 800;
+    padding: 5px;
 }

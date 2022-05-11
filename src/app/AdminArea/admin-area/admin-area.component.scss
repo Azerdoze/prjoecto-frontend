@@ -1,40 +1,63 @@
 .container{
     text-align: center;
 }
-
+h1 {
+    padding-bottom: 10px;
+}
+.adminarea {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    justify-content: center;
+    align-items: center;
+}
 li {
     outline-style: double;
     outline-color: gold;
     a {
         color: gold;
-        font-size: 1.5em;
+        font-size: 1em;
+        font-weight: 800;
         width: 100%;
-    }
-    li:hover {
-        background-color: rgb(49, 49, 49);
     }
 }
 
 .button_holder {
-    background-color: black;   
+    background-color: black;  
+    padding: 0;
+    :hover{
+        background-color: rgb(88, 84, 84);
+    }
+}
+.button_holder:hover {
+    background-color: rgb(88, 84, 84);
 }
 
-button {
+.fake-button {
     background-color: black;
     border: none;
     color: gold;
-    display: inline-block;
-    font-size: 2em;
+    display: inline;
+    font-size: 1em;
+    font-weight: 800;
     cursor: pointer;
-    width: 100%;
+    padding: 10px 2vw;
+}
+.fake-button:hover .dropdown {
+    display: grid;
 }
 
 .dropdown {
-    margin-top: 15px;
-    li {
+    margin-top: 12px;
+    margin-left: -18.5px;
+    position: absolute;
+    display: none;
+    ul li {
         background-color: rgb(36, 12, 1);
+        width: 100%;
+        padding: 0;
     }
 }
 .tabconfig {
-    padding: 10px;
+    padding: 10px 2vw;
+    max-width: inherit;
 }

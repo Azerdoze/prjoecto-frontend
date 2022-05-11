@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import {  ActivatedRoute } from '@angular/router';
 
 import { Nation } from '../../models/nationindetail';
 
@@ -22,7 +22,6 @@ export class NationindetailComponent implements OnInit {
   traits: any = [];
   
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private nationService: NationsService,
     ) { }

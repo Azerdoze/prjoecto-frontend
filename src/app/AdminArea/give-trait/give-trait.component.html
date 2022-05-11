@@ -1,0 +1,45 @@
+<section class="container">
+
+    <h1>Give Trait to Nation</h1>
+
+    <div class="registryForm">
+
+        <form [formGroup]="traitToNation" (ngSubmit)="onSubmit(traitToNation.value)">
+            <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+
+            <div>
+                <label>
+                    Choose a Nation
+                    <select name="nationchosen" formControlName="chosenN" (change)="chooseNation()">
+                        <option *ngFor="let nation of nations; index as i" [ngValue]="nation.nation_id">{{nation.nation_name}}</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Nation Traits
+                    <p *ngFor="let trait of nationtraits">{{trait.trait_name}}</p>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Choose a trait for the nation to acquire
+                    <select name="nationtobechosen" formControlName="chosenT" (change)="chooseTrait()">
+                        <option *ngFor="let trait of traits; index as i" [ngValue]="trait.trait_id">{{trait.trait_name}}</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>
+                    trait description
+                    <p [innerHTML]= "traitdesc | sanitizeHtml" ></p>
+                </label>
+            </div>
+            <div>
+                <button type="submit" name="send">Submit</button>
+            </div>
+        </form>
+        <h5 class="green-alert" role="alert" *ngIf="success">{{traitname}} given to {{nationname}} successfully!</h5>
+    </div>
+    
+</section>

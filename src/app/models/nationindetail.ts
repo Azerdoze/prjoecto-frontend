@@ -10,5 +10,6 @@ export class Nation {
     public nation_banner: null;
     public region_id: string = "";
     public belongs_to: string = "";
-    public traits: Trait [];
+    public traits: Trait [
+    ];
 }

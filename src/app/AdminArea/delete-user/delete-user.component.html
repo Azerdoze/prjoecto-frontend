@@ -1,0 +1,30 @@
+<section class="container">
+
+    <h1>Delete Order</h1>
+    
+    <form action="" [formGroup]="deleteUser" (ngSubmit)="onSubmit()">
+        <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+        
+        <h5 class="red-alert" role="alert" *ngIf="deleteUser.controls['chosen'].errors?.required" style=" text-transform: none;">Please Choose a User</h5>
+        <div>
+            <label>
+                Which User you want to delete?
+                <select name="chosenUser" formControlName="chosen" (change)="chooseUser()" required="">
+                    <option *ngFor="let user of users; index as i" [ngValue]="user.user_id">{{user.user_name}}</option>
+                </select>
+            </label>
+        </div>
+        
+        <h5 class="red-alert" role="alert" *ngIf="deleteUser.controls['checkbox'].errors?.required" style=" text-transform: none;">Please Confirm</h5>
+        <div>
+            <label>
+                Please confirm if this is the item you want to delete
+                <input type="checkbox" formControlName="checkbox" name="agrees" required="">
+            </label>
+        </div>
+        <div>
+            <button type="submit" name="send">Delete</button>
+        </div>
+    </form>
+    <h5 class="green-alert" role="alert" *ngIf="success">Order Deleted successfully!</h5>
+</section>

@@ -8,7 +8,7 @@
       <div class="div-card margin-side text-align-center background-fill-white" *ngFor="let pantheon of pantheons, index as i;">
         <a routerLink="/detailedreligion/{{pantheon.pantheon_id}}">
         <h3 class="golden">{{pantheon.pantheon_name}}</h3>
-        <p><em>{{pantheon.pantheon_summary}}</em></p>
+        <p><em [innerHTML]="pantheon.pantheon_summary | sanitizeHtml"></em></p>
         </a>
       </div>
         

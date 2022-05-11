@@ -4,57 +4,76 @@
 
     <div class="registryForm">
 
-        <form action="" [formGroup]="chosenNation">
-            <select name="nationtobechosen" id="">
-                <option *ngFor="let nation of nations; index as i" value="{{nation.nation_id}}">{{nation.nation_name}}</option>
-            </select>
+        <form [formGroup]="chosenNation">
+            <label>
+                Choose a Nation to be Edited
+                <select name="Nationtobechosen" formControlName="chosen" (change)="chooseNation()">
+                    <option *ngFor="let nation of nations" [ngValue]="nation.nation_id">{{nation.nation_name}}</option>
+                </select>
+            </label>
         </form>
 
-        <form action="" [formGroup]="updateNation">
+        <form [formGroup]="updateNation" (ngSubmit)="onSubmit(updateNation.value)">
+
+            <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateNation.controls['region'].errors?.required" style=" text-transform: none;">Please Select a region</h5>
+            <div>
+                <label>
+                    Region
+                    <select name="region" formControlName="region" required="" (change)="chooseRegion()">
+                        <option *ngFor="let region of regions" [ngValue]="region.region_id">{{ region.region_name }}</option>
+                    </select>
+                </label>
+            </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateNation.controls['name'].errors?.required" style=" text-transform: none;">A Name is required</h5>
             <div>
                 <label>
                     Name
-                    <input type="text" formControlname="nation_name" required="" minlength="8" maxlength="40">
+                    <input type="text" name="nation_name" formControlName="name" required="" minlength="8" maxlength="40">
                 </label>
             </div>
-            <div>
-                <label for="">
-                    Short Description
-                    <textarea name="shortdescription" formControlname="nation_summary" rows="2" cols="30">
-                    </textarea>
-                </label>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateNation.controls['summary'].errors?.required" style=" text-transform: none;">A Summary is required</h5>
+            <div class="box">
+                Short Description
+                <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" name="nation_summary" formControlName="summary" rows="2" cols="30">
+                </ckeditor>
             </div>
-            <div>
-                <label for="">
-                    Description
-                    <textarea name="description" formControlname="nation_description" rows="2" cols="30" required="">
-                    </textarea>
-                </label>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateNation.controls['description'].errors?.required" style=" text-transform: none;">A Description is required</h5>
+            <div class="box">
+                Description
+                <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" name="nation_description" formControlName="description" rows="2" cols="30" required="">
+                </ckeditor>
             </div>
-            <div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateNation.controls['hub'].errors?.required" style=" text-transform: none;">A Hub Name is required</h5>
+            <div >
                 <label>
                     Hub
-                    <input type="text" required="" formControlname="nation_hub" minlength="3" maxlength="30">
+                    <input type="text" name="nation_hub" formControlName="hub" required="" minlength="3" maxlength="30">
                 </label>
             </div>
-            <div>
-                <label for="">
-                    Hub Description
-                    <textarea name="hubdescription" formControlname="nation_hub_description" rows="2" cols="30" required="">
-                    </textarea>
-                </label>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateNation.controls['hub_description'].errors?.required" style=" text-transform: none;">A Hub Description is required</h5>
+            <div class="box">
+                Hub Description
+                <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" name="nation_hub_description" formControlName="hub_description" rows="2" cols="30" required="">
+                </ckeditor>
             </div>
             <div>
-                <label>
-                    Traits
-                    <option>
-                    </option>
-                </label>
+                Parent Nation (if not independent)
+                <select name="belongs" formControlName="belongs">
+                    <option *ngFor="let nation of nations" [ngValue]="nation.nation_id"  default="">{{ nation.nation_name }}</option>
+                </select>
             </div>
             <div>
                 <button type="submit" name="send">Submit</button>
             </div>
         </form>
+        <h5 class="green-alert" role="alert" *ngIf="success">Nation Updated successfully!</h5>
     </div>
     
 </section>

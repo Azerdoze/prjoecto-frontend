@@ -1760,10 +1760,11 @@ export const DummyRegions: Regions [] = [
                 <h3 class="blue">Mastery over ...</h3>
                 <p>Choose one:</p>
                 <ul class="kaastianhouselist">
-                <li><em>Archery</em> : Bows critical threat is from 19-20, instead of 20.</li>
-                <li><em>Precise Katana</em> : Deadly Aim also affects Katanas if using it has a two-handed weapon.</li>
-                <li><em>Master of Chains</em> : +2 to Damage rolls and Armor Class while using Chain Weapons..</li>
-                <li><em>Ninja-to</em> : +2 to Attack and Damage rolls while using a wakizachi.</li>
+                <li><em>Archery</em> : Proficient with Bows. Bows critical threat is from 19-20, instead of 20.</li>
+                <li><em>Katanas</em> : Proficient with Katanas. Katanas are considered light weapons for the purpose of weapon finesse.</li>
+                <li><em>Chains</em> : Proficient with rope dart, meteor hammer, double chained Kama, Flying Blade, spiked chain and Kusarigama. +2 to attack rolls and Armor Class while using any of those weapons.</li>
+                <li><em>Ninja-to</em> : Proficient with Wakizachi. +2 to Attack and Damage rolls while using a wakizachi. While charging, Wakizachi deal double piercing damage and the crit multiplier is x3.</li>
+                <li><em>Empty Palm</em> : +2 to damage rolls and Armor Class while using unarmed strikes and monk weapons.</li>
                 </ul>
                 `
             },

@@ -4,43 +4,52 @@
 
     <div class="registryForm">
 
-        <form action="" [formGroup]="chosenPantheon">
-            <select name="pantheontobechosen" id="">
-                <option *ngFor="let pantheon of pantheons; index as i" value="{{pantheon.pantheon_id}}">{{pantheon.pantheon_name}}</option>
+        <form [formGroup]="chosenPantheon">
+            <select name="pantheontobechosen" formControlName="chosen" (change)="choosePantheon()">
+                <option *ngFor="let pantheon of pantheons; index as i" [ngValue]="pantheon.pantheon_id">{{pantheon.pantheon_name}}</option>
             </select>
         </form>
 
-        <form action="" [formGroup]="updatePantheon">
+        <h5 class="red-alert" role="alert" *ngIf="message">{{message}}</h5>
+
+        
+        <form action="" [formGroup]="updatePantheon" (ngSubmit)="onSubmit(updatePantheon.value)">
+
+            <h5 class="red-alert" role="alert" *ngIf="updatePantheon.controls['name'].errors?.required" style=" text-transform: none;">A name is Required</h5>
             <div>
                 <label>
                     Name
-                    <input type="text" formControlname="pantheon_name" required="" minlength="8" maxlength="40">
+                    <input type="text" formControlName="name" required="" minlength="3" maxlength="40">
                 </label>
             </div>
-            <div>
-                <label for="">
-                    Short Description
-                    <textarea name="shortdescription" formControlname="pantheon_summary" rows="2" cols="30">
-                    </textarea>
+            <h5 class="red-alert" role="alert" *ngIf="updatePantheon.controls['summary'].errors?.required" style=" text-transform: none;">A summary is Required</h5>
+            <div class="box">
+                <label>
+                    Short Description (max 200 characters)
+                    <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" name="shortdescription" formControlName="summary" required="" minlength="3" maxlength="200">
+                    </ckeditor>
                 </label>
             </div>
-            <div>
-                <label for="">
+            <h5 class="red-alert" role="alert" *ngIf="updatePantheon.controls['description'].errors?.required" style=" text-transform: none;">A description is Required</h5>
+            <div class="box">
+                <label>
                     Description
-                    <textarea name="description" formControlname="pantheon_description" rows="2" cols="30" required="">
-                    </textarea>
+                    <ckeditor [editor]="Editor" [config]="{toolbar: ['heading','bold','italic','bulletedList', 'numberedList']}" name="description" formControlName="description" required="" minlength="3" maxlength="65535">
+                    </ckeditor>
                 </label>
             </div>
+            <h5 class="red-alert" role="alert" *ngIf="updatePantheon.controls['scope'].errors?.required" style=" text-transform: none;">A scope is Required</h5>
             <div>
                 <label>
                     Scope
-                    <input type="text" required="" formControlname="pantheon_scope" minlength="3" maxlength="30">
+                    <input type="text" required="" formControlName="scope" minlength="3" maxlength="30">
                 </label>
             </div>
             <div>
                 <button type="submit" name="send">Submit</button>
             </div>
         </form>
+        <h5 class="green-alert" role="alert" *ngIf="success">Pantheon Updated successfully!</h5>
     </div>
     
 </section>

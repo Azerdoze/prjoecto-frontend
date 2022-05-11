@@ -8,7 +8,7 @@ export class User {
         public user_password: string,
         public user_country: string,
         public user_city: string,
-        public is_admin: boolean,
+        public is_admin: boolean | string,
         private JWToken: string
     ){}
 

@@ -4,53 +4,71 @@
 
     <div class="registryForm">
 
-        <form action="" [formGroup]="chosenGod">
-            <select name="godtobechosen" id="">
-                <option *ngFor="let god of gods; index as i" value="{{god.god_id}}">{{god.god_name}}</option>
-            </select>
+        <form [formGroup]="chosenGod">
+            <label>
+                Choose a God to be Edited
+                <select name="godtobechosen" formControlName="godtobechosen" (change)="chooseGod()">
+                    <option *ngFor="let god of gods" [ngValue]="god.god_id">{{god.god_name}}</option>
+                </select>
+            </label>
         </form>
 
-        <form [formGroup]="updateGod" (ngSubmit)="onSubmit()">
+        <form [formGroup]="updateGod" (ngSubmit)="onSubmit(updateGod)">
         <h5 class="red-alert" role="alert" *ngIf="Message">{{Message}}</h5>
+
+        <h5 class="red-alert" role="alert" *ngIf="updateGod.controls['name'].errors?.required" style=" text-transform: none;">Name is required</h5>
             <div>
                 <label>
                     Name
-                    <input type="text" name="god" formControlname="name" required="" minlength="8" maxlength="40">
+                    <input type="text" formControlName="name"  required minlength="3" maxlength="40">
                 </label>
             </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateGod.controls['alignment'].errors?.required" style=" text-transform: none;">An Alignment is required</h5>
             <div>
                 <label>
                     alignment
-                <input type="text" name="alignment" formControlname="summary" required="" minlength="2" maxlength="15">
+                <input type="text" name="alignment" formControlName="alignment"  required="" minlength="2" maxlength="15">
                 </label>
             </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateGod.controls['domains'].errors?.required" style=" text-transform: none;">At least one Domains is required</h5>
             <div>
                 <label>
                     God Domains
-                    <input type="text" name="domains" formControlname="domains" required="" minlength="8" maxlength="50">
+                    <input type="text" name="domains" formControlName="domains"  required="" minlength="8" maxlength="50">
                 </label>
             </div>
+
+            <h5 class="red-alert" role="alert" *ngIf="updateGod.controls['mysteries'].errors?.required" style=" text-transform: none;">At least one Mystery is required</h5>
             <div>
                 <label>
                     God Mysteries
-                    <input type="text" name="mysteries" formControlname="mysteries" required="" minlength="8" maxlength="50">
+                    <input type="text" name="mysteries" formControlName="mysteries"  required="" minlength="8" maxlength="50">
                 </label>
             </div>
+            
+            <h5 class="red-alert" role="alert" *ngIf="updateGod.controls['favweapon'].errors?.required" style=" text-transform: none;">A God's Favoured Weapon is Required</h5>
             <div>
                 <label>
                     God's Favoured Weapon
-                    <input type="text" name="favweapon" formControlname="favweapon" required=""  minlength="3" maxlength="50">
+                    <input type="text" name="favweapon" formControlName="favweapon"  required=""  minlength="3" maxlength="50">
                 </label>
             </div>
+            
+            <h5 class="red-alert" role="alert" *ngIf="updateGod.controls['pantheon'].errors?.required" style=" text-transform: none;">Please choose a pantheon</h5>
             <div>
                 <label>
                     Belongs to which Pantheon
-                    <option></option>
+                    <select name="pantheons" formControlName="pantheon" (change)="choosePantheon()">
+                        <option *ngFor="let pantheon of pantheons" [ngValue]="pantheon.pantheon_id">{{pantheon.pantheon_name}}</option>
+                    </select>
                 </label>
             </div>
             <div>
                 <button type="submit" name="send">Register</button>
             </div>
+            <h5 class="green-alert" role="alert" *ngIf="success">God Updated successfully!</h5>
         </form>
     </div>
 </section>
